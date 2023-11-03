@@ -12,8 +12,7 @@ public static class clsDataAccess
     /// <summary>
     /// Connection string to the database.
     /// </summary>
-    private static string sConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source= " + Directory.GetCurrentDirectory() + "\\ReservationSystem.mdb";
-
+    private static string sConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source= " + Directory.GetCurrentDirectory() + "\\Invoice.mdb";
 
 
     /// <summary>
