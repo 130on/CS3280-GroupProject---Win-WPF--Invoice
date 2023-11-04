@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Items\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Database\Invoice.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
