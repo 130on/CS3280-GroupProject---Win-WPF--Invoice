@@ -25,6 +25,7 @@ namespace GroupAssignmentAlonColetonWannes
         public MainWindow()
         {
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             //Test Statement to test sql access 
             DataSet dsInvoice = new();
