@@ -31,6 +31,15 @@ namespace GroupAssignmentAlonColetonWannes
             int count = 0;   //Number of return values
             string sSQL = "SELECT * FROM Invoices";
             dsInvoice = clsDataAccess.ExecuteSQLStatement(sSQL, ref count);
+
+
+            //Testing repo access
+            int x = 4;
+            int y = 5;
+            for(int i  = 0; i < x; i++)
+            {
+                y += i;
+            }
         }
     }
 }
