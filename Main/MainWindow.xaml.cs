@@ -38,7 +38,7 @@ namespace GroupAssignmentAlonColetonWannes
             int y = 5;
             for(int i  = 0; i < x; i++)
             {
-                y += i;
+                y += i*2;
             }
         }
     }
