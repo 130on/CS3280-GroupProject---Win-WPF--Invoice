@@ -12,24 +12,28 @@ namespace GroupAssignmentAlonColetonWannes.Items
 {
     public static class clsItemsSQL
     {
-        public static void loadItemList()
+
+        public static List<itemDetail> getItemsList()
         {
+            List<itemDetail> items = new();
+
             int iItemCounter = 0;   //Number of return values
             string sSQL = "select ItemCode, ItemDesc, Cost from ItemDesc";
             DataSet dsItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
 
-            for (int i = 0; i < iItemCounter; i++)
+            foreach (DataRow itemRow in dsItems.Tables[0].Rows)
             {
-                string itemCode = (string)dsItems.Tables[0].Rows[i]["ItemCode"];
-                string itemDesc = (string)dsItems.Tables[0].Rows[i]["ItemDesc"];
-                decimal cost = (decimal)dsItems.Tables[0].Rows[i]["Cost"];
+                string itemCode = (string)itemRow["ItemCode"];
+                string itemDesc = (string)itemRow["ItemDesc"];
+                decimal cost = (decimal)itemRow["Cost"];
 
-                //listController.addItem(itemCode, itemDesc, cost);
-                clsItemsLogic.ItemList.Add(new itemDetail(itemCode, itemDesc, cost));
+                items.Add(new itemDetail(itemCode, itemDesc, cost));
             }
+
+            return items;
         }
 
-        public static List<int> getInvoicesWithItem(string itemCod, ref int invoiceCount)
+        public static List<int> getInvoicesWithItemCode(string itemCod, ref int invoiceCount)
         {
             DataSet dsInvoiceList = new DataSet();
             string sSQL = $"select distinct(InvoiceNum) from LineItems where ItemCode = '{itemCod}'";
@@ -50,21 +54,8 @@ namespace GroupAssignmentAlonColetonWannes.Items
             string sSQL = $"Update ItemDesc Set ItemDesc = '{newItemDesc}', Cost = {newItemCost} where ItemCode = '{itemCode}'";
             int effectedRows = clsDataAccess.ExecuteNonQuery(sSQL);
 
-            if(effectedRows != 0 )
-            {
-                foreach (itemDetail item in clsItemsLogic.ItemList)
-                {
-                    if(item.ItemCode == itemCode)
-                    {
-                        item.ItemDesc = newItemDesc;
-                        item.Cost = newItemCost;
-                        break;
-                    }
-                }
-                return true;
-            }
 
-            return false;
+            return effectedRows != 0 ? true : false;
         }
 
 
@@ -73,23 +64,18 @@ namespace GroupAssignmentAlonColetonWannes.Items
             string sSQL = $"Insert into ItemDesc (ItemCode, ItemDesc, Cost) Values ('{newItemCode}', '{newItemDesc}', {newItemCost})";
             int effectedRows = clsDataAccess.ExecuteNonQuery(sSQL);
 
-            clsItemsLogic.ItemList.Add(new itemDetail(newItemCode, newItemDesc, newItemCost));
 
-            return true;
+            return effectedRows != 0 ? true : false;
         }
 
 
         public static bool deleteItem(string  itemCode)
         {
             string sSQL = $"Delete from ItemDesc Where ItemCode = '{itemCode}'";
-            foreach (itemDetail item in clsItemsLogic.ItemList)
-            {
-                if (item.ItemCode == itemCode)
-                {
-                    clsItemsLogic.ItemList.Remove(item);
-                }
-            }
-            return true;
+
+            int effectedRows = clsDataAccess.ExecuteNonQuery(sSQL);
+
+            return effectedRows != 0 ? true : false;
         }
     }
 }

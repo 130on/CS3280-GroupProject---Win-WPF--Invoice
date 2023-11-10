@@ -72,5 +72,26 @@ namespace GroupAssignmentAlonColetonWannes.Main
             string sSQL = $"select ItemCode, ItemDesc, Cost from ItemDesc WHERE = '{itemCode}'";
             return clsDataAccess.ExecuteScalarSQL(sSQL);
         }
+
+        public static List<itemDetail> getItemsList()
+        {
+            List <itemDetail>  items = new();
+           
+            int iItemCounter = 0;   //Number of return values
+            string sSQL = "select ItemCode, ItemDesc, Cost from ItemDesc";
+            DataSet dsItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
+
+            foreach(DataRow itemRow in dsItems.Tables[0].Rows)
+            {
+                string itemCode = (string)itemRow["ItemCode"];
+                string itemDesc = (string)itemRow["ItemDesc"];
+                decimal cost = (decimal)itemRow["Cost"];
+
+                items.Add(new itemDetail(itemCode, itemDesc, cost));
+            }
+            
+            
+            return items;
+        }
     }
 }

@@ -41,7 +41,6 @@ namespace GroupAssignmentAlonColetonWannes
 
 
 
-            clsItemsSQL.loadItemList();
 
             clsSearchSQL.loadInvoices();
 
@@ -55,9 +54,8 @@ namespace GroupAssignmentAlonColetonWannes
 
             int z = 0;
 
-            clsItemsSQL.getInvoicesWithItem("A", ref z);
+            clsItemsSQL.getInvoicesWithItemCode("A", ref z);
 
-            testBox.ItemsSource = clsItemsLogic.ItemList;
 
             Dictionary<int, string> invoiceItems = clsMainSQL.getInvoiceItems(5000);
         }

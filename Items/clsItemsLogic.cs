@@ -10,13 +10,7 @@ namespace GroupAssignmentAlonColetonWannes.Items
 {
     public class clsItemsLogic
     {
-        private static BindingList<itemDetail> itemList = new BindingList<itemDetail>();
-        public static BindingList<itemDetail> ItemList
-        {
-            get
-            {
-                return itemList;
-            }
-        }
+
+
     }
 }
