@@ -1,6 +1,8 @@
 ﻿using GroupAssignmentAlonColetonWannes.Common;
+using GroupAssignmentAlonColetonWannes.Items;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,7 +54,23 @@ namespace GroupAssignmentAlonColetonWannes.Main
         public static Dictionary<int, string> getInvoiceItems(int invoiceNumber)
         {
             string sSQL = $"Select LineItemNum, ItemCode FROM LineItems WHERE InvoiceNum = {invoiceNumber}";
+            int iItemCounter = 0;   //Number of return values
+            DataSet dsInvoiceItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
+            Dictionary<int, string> invoiceItems = new();
+            foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
+            {
+                int lineItemNum = (int)row["LineItemNum"];
+                string ItemCode = (string)row["ItemCode"];
+                invoiceItems.Add(lineItemNum, ItemCode);
+            }
+           
+            return invoiceItems;
+        }
 
+        public static string getItem(string itemCode)
+        {
+            string sSQL = $"select ItemCode, ItemDesc, Cost from ItemDesc WHERE = '{itemCode}'";
+            return clsDataAccess.ExecuteScalarSQL(sSQL);
         }
     }
 }

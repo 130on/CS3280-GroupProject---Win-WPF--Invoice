@@ -1,5 +1,6 @@
 ﻿using GroupAssignmentAlonColetonWannes.Common;
 using GroupAssignmentAlonColetonWannes.Items;
+using GroupAssignmentAlonColetonWannes.Main;
 using GroupAssignmentAlonColetonWannes.Search;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,8 @@ namespace GroupAssignmentAlonColetonWannes
             clsItemsSQL.getInvoicesWithItem("A", ref z);
 
             testBox.ItemsSource = clsItemsLogic.ItemList;
+
+            Dictionary<int, string> invoiceItems = clsMainSQL.getInvoiceItems(5000);
         }
     }
 }

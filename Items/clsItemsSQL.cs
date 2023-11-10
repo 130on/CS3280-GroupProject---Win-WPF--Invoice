@@ -14,10 +14,9 @@ namespace GroupAssignmentAlonColetonWannes.Items
     {
         public static void loadItemList()
         {
-            DataSet dsItems = new DataSet();
             int iItemCounter = 0;   //Number of return values
             string sSQL = "select ItemCode, ItemDesc, Cost from ItemDesc";
-            dsItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
+            DataSet dsItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
 
             for (int i = 0; i < iItemCounter; i++)
             {
