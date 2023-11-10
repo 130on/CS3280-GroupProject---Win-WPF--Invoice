@@ -60,7 +60,7 @@ public static class clsDataAccess
     }
 
     /// <summary>
-    /// This method takes an SQL statment that is passed in and executes it.  The resulting single 
+    /// This method takes an SQL statement that is passed in and executes it.  The resulting single 
     /// value is returned.
     /// </summary>
     /// <param name="sSQL">The SQL statement to be executed.</param>
@@ -108,7 +108,7 @@ public static class clsDataAccess
     }
 
     /// <summary>
-    /// This method takes an SQL statment that is a non query and executes it.
+    /// This method takes an SQL statement that is a non query and executes it.
     /// </summary>
     /// <param name="sSQL">The SQL statement to be executed.</param>
     /// <returns>Returns the number of rows affected by the SQL statement.</returns>

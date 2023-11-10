@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GroupAssignmentAlonColetonWannes.Common;
+using GroupAssignmentAlonColetonWannes.Items;
+using GroupAssignmentAlonColetonWannes.Search;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,13 +37,26 @@ namespace GroupAssignmentAlonColetonWannes
             dsInvoice = clsDataAccess.ExecuteSQLStatement(sSQL, ref count);
 
 
-            //Testing repo access
-            int x = 4;
-            int y = 5;
-            for(int i  = 0; i < x; i++)
-            {
-                y += i*2;
-            }
+
+
+
+            clsItemsSQL.loadItemList();
+
+            clsSearchSQL.loadInvoices();
+
+            clsSearchSQL.loadInvoices(5000, null, null);
+            DateTime x = DateTime.Now;
+            clsSearchSQL.loadInvoices(null, x, null);
+
+            clsSearchSQL.loadInvoices(5000, x, null);
+
+            clsSearchSQL.loadInvoices(null, x, 120);
+
+            int z = 0;
+
+            clsItemsSQL.getInvoicesWithItem("A", ref z);
+
+            testBox.ItemsSource = clsItemsLogic.ItemList;
         }
     }
 }
