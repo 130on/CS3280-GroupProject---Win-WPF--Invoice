@@ -90,8 +90,15 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 items.Add(new itemDetail(itemCode, itemDesc, cost));
             }
             
-            
             return items;
+        }
+
+        //might still need the delete ones but the one I have in the doc is incorrect 
+        public static bool removeItem(int invoiceNum, int lineNumber, string itemCode)
+        {
+            string sSQL = $"DELETE FROM LineItems WHERE InvoiceNum = {invoiceNum} AND lineNumber = {lineNumber} AND itemCode = {itemCode}";
+
+            return false;
         }
     }
 }
