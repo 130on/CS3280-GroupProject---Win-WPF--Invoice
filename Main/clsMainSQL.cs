@@ -12,7 +12,12 @@ namespace GroupAssignmentAlonColetonWannes.Main
     public static class clsMainSQL
     {
 
-
+        /// <summary>
+        /// Takes an invoiceNumber and the new cost and updates in the database
+        /// </summary>
+        /// <param name="invoiceNumber">The invoiceNumber as an int ex 5000</param>
+        /// <param name="newTotalCost">The new cost that should be updated as int ex 700</param>
+        /// <returns>True if a row got updated or false if nothing changed</returns>
         public static bool updateTotalCost(int invoiceNumber, int newTotalCost)
         {
             string sSQL = $"UPDATE Invoices SET TotalCost = {newTotalCost} WHERE InvoiceNum = {invoiceNumber}";
@@ -21,6 +26,13 @@ namespace GroupAssignmentAlonColetonWannes.Main
             return rowsUpdated > 0 ? true : false;
         }
 
+        /// <summary>
+        /// Takes an invoiceNumber, the row the item is at and a item code, and adds it to the database
+        /// </summary>
+        /// <param name="invoiceNumber"></param>
+        /// <param name="newLineItemNum"></param>
+        /// <param name="newItemCode"></param>
+        /// <returns>True if a row got updated or false if nothing changed</returns>
         public static bool newItemInInvoice(int invoiceNumber, int newLineItemNum, string newItemCode)
         {
             string sSQL = $"INSERT INTO LineItems (InvoiceNum, LineItemNum, ItemCode) Values ({invoiceNumber}, {newLineItemNum}, '{newItemCode}')";
@@ -93,11 +105,30 @@ namespace GroupAssignmentAlonColetonWannes.Main
             return items;
         }
 
-        //might still need the delete ones but the one I have in the doc is incorrect 
-        public static bool removeItem(int invoiceNum, int lineNumber, string itemCode)
+        public static bool removeItem(int invoiceNum, int lineNumber)
         {
-            string sSQL = $"DELETE FROM LineItems WHERE InvoiceNum = {invoiceNum} AND lineNumber = {lineNumber} AND itemCode = {itemCode}";
+            string sSQL = $"DELETE FROM LineItems WHERE InvoiceNum = {invoiceNum} AND lineNumber = {lineNumber}";
+            int rowsUpdated = clsDataAccess.ExecuteNonQuery(sSQL);
 
+            return rowsUpdated > 0 ? true : false;
+        }
+
+        public static bool deleteAllItems(int invoiceNum)
+        {
+            string sSQL = $"DELETE FROM LineItems WHERE InvoiceNum = {invoiceNum}";
+            int rowsUpdated = clsDataAccess.ExecuteNonQuery(sSQL);
+
+            return rowsUpdated > 0 ? true : false;
+        }
+
+        public static bool deleteInvoice(int invoiceNum)
+        {
+            string sSQL = $"DELETE FROM Invoice WHERE InvoiceNum = {invoiceNum}";
+            if (deleteAllItems(invoiceNum))
+            {
+                int rowsUpdated = clsDataAccess.ExecuteNonQuery(sSQL);
+                return rowsUpdated > 0 ? true : false;
+            }
             return false;
         }
     }
