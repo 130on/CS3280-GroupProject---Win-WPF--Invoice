@@ -23,5 +23,29 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             InitializeComponent();
         }
+
+   /// <summary>
+   /// handles click on select button
+   /// </summary>
+   /// <param name="sender"></param>
+   /// <param name="e"></param>
+ private void selectBtn_Click(object sender, RoutedEventArgs e)
+        {
+                                        // ADD - pass invoice id to the mainwindow before close
+            this.Close();
+
+        }
+
+        /// <summary>
+        /// handles click on 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+       
     }
 }
