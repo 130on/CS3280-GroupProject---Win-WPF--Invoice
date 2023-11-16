@@ -10,7 +10,8 @@ namespace GroupAssignmentAlonColetonWannes.Items
 {
     public class clsItemsLogic
     {
-
+        //Property for checking if an item has been modified
+        //public bool itemModified { get; set; }
 
     }
 }

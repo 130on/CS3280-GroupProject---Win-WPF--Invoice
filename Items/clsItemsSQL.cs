@@ -13,6 +13,10 @@ namespace GroupAssignmentAlonColetonWannes.Items
     public static class clsItemsSQL
     {
 
+        /// <summary>
+        /// Returns a list of all items
+        /// </summary>
+        /// <returns>The list of items</returns>
         public static List<itemDetail> getItemsList()
         {
             List<itemDetail> items = new();
@@ -33,6 +37,12 @@ namespace GroupAssignmentAlonColetonWannes.Items
             return items;
         }
 
+        /// <summary>
+        /// Returns a list of all invoices that contain a specific item code
+        /// </summary>
+        /// <param name="itemCod">The item code</param>
+        /// <param name="invoiceCount">The number of invoices</param>
+        /// <returns>The list of invoices</returns>
         public static List<int> getInvoicesWithItemCode(string itemCod, ref int invoiceCount)
         {
             DataSet dsInvoiceList = new DataSet();
@@ -49,6 +59,13 @@ namespace GroupAssignmentAlonColetonWannes.Items
             return invoicesNumbers;
         }
 
+        /// <summary>
+        /// Update an item
+        /// </summary>
+        /// <param name="itemCode">New item code</param>
+        /// <param name="newItemDesc">New item description</param>
+        /// <param name="newItemCost">New item cost</param>
+        /// <returns></returns>
         public static bool updateItem(string itemCode, string newItemDesc, decimal newItemCost)
         {
             string sSQL = $"Update ItemDesc Set ItemDesc = '{newItemDesc}', Cost = {newItemCost} where ItemCode = '{itemCode}'";
@@ -58,7 +75,13 @@ namespace GroupAssignmentAlonColetonWannes.Items
             return effectedRows != 0 ? true : false;
         }
 
-
+        /// <summary>
+        /// Add a new item
+        /// </summary>
+        /// <param name="newItemCode">Item code</param>
+        /// <param name="newItemDesc">Item description</param>
+        /// <param name="newItemCost">Item cost</param>
+        /// <returns></returns>
         public static bool newItem(string newItemCode, string newItemDesc, decimal newItemCost) {
 
             string sSQL = $"Insert into ItemDesc (ItemCode, ItemDesc, Cost) Values ('{newItemCode}', '{newItemDesc}', {newItemCost})";
@@ -68,7 +91,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             return effectedRows != 0 ? true : false;
         }
 
-
+        /// <summary>
+        /// Delete an item
+        /// </summary>
+        /// <param name="itemCode">The code for the item</param>
+        /// <returns></returns>
         public static bool deleteItem(string  itemCode)
         {
             string sSQL = $"Delete from ItemDesc Where ItemCode = '{itemCode}'";
