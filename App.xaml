@@ -5,6 +5,6 @@
              StartupUri="Main/MainWindow.xaml">
 
     <Application.Resources>
-         
+        <ResourceDictionary Source="BasicDictonary.xaml"></ResourceDictionary>
     </Application.Resources>
 </Application>

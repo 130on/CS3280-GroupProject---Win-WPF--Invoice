@@ -26,6 +26,8 @@ namespace GroupAssignmentAlonColetonWannes
     /// </summary>
     public partial class MainWindow : Window
     {
+        private wndItems wndItemManger;
+        private wndSearch wndSearchManger;
         public MainWindow()
         {
             InitializeComponent();
@@ -58,6 +60,25 @@ namespace GroupAssignmentAlonColetonWannes
 
 
             Dictionary<int, string> invoiceItems = clsMainSQL.getInvoiceItems(5000);
+        }
+
+        private void btnSearchScreen_Click(object sender, RoutedEventArgs e)
+        {
+            wndSearchManger = new wndSearch();
+            this.Hide();
+            
+            wndSearchManger.ShowDialog();
+
+            this.Show();
+        }
+
+        private void btnItemWindow_Click(object sender, RoutedEventArgs e)
+        {
+            wndItemManger = new wndItems();
+
+            this.Hide();
+            wndItemManger.ShowDialog();
+            this.Show();
         }
     }
 }
