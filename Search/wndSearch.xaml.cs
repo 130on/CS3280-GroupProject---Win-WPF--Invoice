@@ -33,7 +33,11 @@ namespace GroupAssignmentAlonColetonWannes.Search
    /// <param name="e"></param>
  private void selectBtn_Click(object sender, RoutedEventArgs e)
         {
-                                        // ADD - pass invoice id to the mainwindow before close
+            
+            
+            // Select invoice
+            // save invoice ID to var
+            // pass invoice id to the mainwindow before close
             
             this.Close();
 
