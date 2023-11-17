@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace GroupAssignmentAlonColetonWannes.Items
 {
+    /// <summary>
+    /// Holds all SQL logic for the items
+    /// </summary>
     public static class clsItemsSQL
     {
 
