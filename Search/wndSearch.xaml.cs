@@ -35,8 +35,8 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             
             
-            // Select invoice
-            // save invoice ID to var
+            // Select invoice and store it in static var using storeId()
+
             // pass invoice id to the mainwindow before close
             
             this.Close();
