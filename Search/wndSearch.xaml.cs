@@ -22,6 +22,8 @@ namespace GroupAssignmentAlonColetonWannes.Search
         public wndSearch()
         {
             InitializeComponent();
+            
+            // loadInvoices() to datagrid 
         }
 
    /// <summary>
@@ -31,7 +33,12 @@ namespace GroupAssignmentAlonColetonWannes.Search
    /// <param name="e"></param>
  private void selectBtn_Click(object sender, RoutedEventArgs e)
         {
-                                        // ADD - pass invoice id to the mainwindow before close
+            
+            
+            // Select invoice and store it in static var using storeId()
+
+            // pass invoice id to the mainwindow before close
+            
             this.Close();
 
         }
@@ -46,6 +53,21 @@ namespace GroupAssignmentAlonColetonWannes.Search
             this.Close();
         }
 
-       
+        /// <summary>
+        /// resets the search page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clearBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        // invoice number comboBox - loadInvoices(SearchInvoicNum) 
+
+        // invoice total - loadInvoices(searchTotalcost)
+
+        // invoice date - loadInvoices(searchDate)
+
     }
 }

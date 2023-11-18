@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace GroupAssignmentAlonColetonWannes.Items
 {
+    /// <summary>
+    /// Hold the main logic for the items
+    /// </summary>
     public class clsItemsLogic
     {
         //Property for checking if an item has been modified variable

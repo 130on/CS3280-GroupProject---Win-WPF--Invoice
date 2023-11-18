@@ -19,9 +19,14 @@ namespace GroupAssignmentAlonColetonWannes.Items
     /// </summary>
     public partial class wndItems : Window
     {
+
+        //clsItemsLogic ItemsLogic
+
         public wndItems()
         {
             InitializeComponent();
+
+            //loadItems() to datagrid
         }
     }
 }
