@@ -34,32 +34,7 @@ namespace GroupAssignmentAlonColetonWannes
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             //Test Statement to test sql access 
-            DataSet dsInvoice = new();
-            int count = 0;   //Number of return values
-            string sSQL = "SELECT * FROM Invoices";
-            dsInvoice = clsDataAccess.ExecuteSQLStatement(sSQL, ref count);
-
-
-
-
-
-
-            clsSearchSQL.loadInvoices();
-
-            clsSearchSQL.loadInvoices(5000, null, null);
-            DateTime x = DateTime.Now;
-            clsSearchSQL.loadInvoices(null, x, null);
-
-            clsSearchSQL.loadInvoices(5000, x, null);
-
-            clsSearchSQL.loadInvoices(null, x, 120);
-
-            int z = 0;
-
-            clsItemsSQL.getInvoicesWithItemCode("A", ref z);
-
-
-            Dictionary<int, string> invoiceItems = clsMainSQL.getInvoiceItems(5000);
+            clsMainLogic.testSQLStatement();
         }
 
         private void btnSearchScreen_Click(object sender, RoutedEventArgs e)
@@ -68,6 +43,8 @@ namespace GroupAssignmentAlonColetonWannes
             this.Hide();
             
             wndSearchManger.ShowDialog();
+            //check clsSearchLogic if there is a change has been made. 
+            //And or get the return variable from wndSearch
 
             this.Show();
         }
@@ -78,6 +55,10 @@ namespace GroupAssignmentAlonColetonWannes
 
             this.Hide();
             wndItemManger.ShowDialog();
+            //check clsItemLogic if there is a change has been made. if it is a static var
+             //And or get the return variable from wndItem
+
+
             this.Show();
         }
     }

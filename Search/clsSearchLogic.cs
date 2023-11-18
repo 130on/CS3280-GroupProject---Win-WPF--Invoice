@@ -9,6 +9,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
     public class clsSearchLogic
     {
 
+
         // static var that stores the invoice ID
         
         // storeId()

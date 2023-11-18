@@ -13,8 +13,9 @@ namespace GroupAssignmentAlonColetonWannes.Items
     /// </summary>
     public class clsItemsLogic
     {
-        //Property for checking if an item has been modified
-        //public bool itemModified { get; set; }
+        //Property for checking if an item has been modified variable
+        //public bool itemModified { get; set; } static variable
+
 
     }
 }
