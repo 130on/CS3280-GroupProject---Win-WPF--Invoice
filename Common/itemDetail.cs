@@ -40,7 +40,7 @@ namespace GroupAssignmentAlonColetonWannes.Common
         }
 
         public override string ToString() {
-            return $"ItemCode: {itemCode} ItemDesc: {ItemDesc} Cost: {cost}";
+            return $"{ItemDesc}";
         }
 
     }

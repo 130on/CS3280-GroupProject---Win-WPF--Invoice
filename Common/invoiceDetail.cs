@@ -14,11 +14,12 @@ namespace GroupAssignmentAlonColetonWannes.Common
         private int invoiceNum;
         //invoiceDate date object (optional?)
         private DateTime invoiceDate;
-        //int totalCost
+        //int getTotalCost
         private int totalCost;
         //list of items on the list
         private BindingList<itemDetail> invoiceItems = new();
 
+        public Dictionary<int, itemDetail> invoiceItemDictionary = new();
         #endregion
 
         #region Get Statements
@@ -40,6 +41,8 @@ namespace GroupAssignmentAlonColetonWannes.Common
             get { return invoiceItems; }
         }
         #endregion
+
+
 
         public invoiceDetail(int invoiceNum, DateTime invoiceDate, int totalCost)
         {
