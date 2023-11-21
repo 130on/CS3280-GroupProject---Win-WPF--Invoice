@@ -28,13 +28,17 @@ namespace GroupAssignmentAlonColetonWannes
     {
         private wndItems wndItemManger;
         private wndSearch wndSearchManger;
+        private bool editMode = true;
         public MainWindow()
         {
+
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             //Test Statement to test sql access 
             clsMainLogic.testSQLStatement();
+            btnEditSaveInvoice.Content = "Edit Invoice";
+
         }
 
         private void btnSearchScreen_Click(object sender, RoutedEventArgs e)
@@ -60,6 +64,35 @@ namespace GroupAssignmentAlonColetonWannes
 
 
             this.Show();
+        }
+
+        private void btnEditSaveInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+            {
+                btnEditSaveInvoice.Content = "Save Invoice";
+                dpInvoiceDate.IsEnabled = true;
+                editMode = true;
+                
+            }
+            else if(!editMode)
+            {
+                dpInvoiceDate.IsEnabled = false;
+                btnEditSaveInvoice.Content = "Edit Invoice";
+                editMode = false;
+            }
+        }
+
+        private void btnNewInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            btnEditSaveInvoice.IsEnabled = true;
+        }
+
+
+        private void btnCancelChanges_Click(object sender, RoutedEventArgs e)
+        {
+            btnEditSaveInvoice.Content = "Edit Invoice";
+
         }
     }
 }
