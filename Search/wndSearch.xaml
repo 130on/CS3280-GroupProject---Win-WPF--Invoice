@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignmentAlonColetonWannes.Search"
         mc:Ignorable="d"
-        Title="wndSearch" Height="517" Width="865">
+        Title="wndSearch" Height="579" Width="919">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="148.762"/>
@@ -19,7 +19,7 @@
             </Grid.ColumnDefinitions>
             <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2"/>
             <Button Style="{DynamicResource MainButtonController}" x:Name="selectBtn" Grid.Column="1" Content="Select Invoice" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Click="selectBtn_Click" />
-            <Button Style="{DynamicResource MainButtonController}" x:Name="clearBtn" Grid.Column="1" Content="Clear Selection" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0"/>
+            <Button Style="{DynamicResource MainButtonController}" x:Name="clearBtn" Grid.Column="1" Content="Clear Selection" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" Click="clearBtn_Click"/>
             <Label Content="Invoice List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="128" FontWeight="Bold" FontSize="16"/>
             <Button Style="{DynamicResource MainButtonController}" x:Name="cancelBtn" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,244,0,0" Click="cancelBtn_Click"/>
         </Grid>
@@ -32,7 +32,7 @@
             </Grid.ColumnDefinitions>
             <DatePicker Grid.Column="2" HorizontalAlignment="Left" Margin="129,73,0,0" VerticalAlignment="Top" Width="124" Height="39" BorderThickness="3,3,3,3"/>
 
-            <ComboBox Style="{DynamicResource ComboBoxDefault}" Grid.Column="0" IsEditable="True" DockPanel.Dock="Right" Width="100" Margin="156,80,32,38" BorderThickness="3,3,3,3"/>
+            <ComboBox x:Name="invoiceNum" Style="{DynamicResource ComboBoxDefault}" Grid.Column="0" IsEditable="True" DockPanel.Dock="Right" Width="100" Margin="156,80,32,38" BorderThickness="3,3,3,3"/>
             <Label Grid.Column="0" Content="Invoice Number:" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="14,77,0,0" VerticalAlignment="Top" Width="137" Style="{DynamicResource BasicLabel}"/>
 
             <ComboBox Grid.Column="1" IsEditable="True" DockPanel.Dock="Right" Margin="134,80,48,38" BorderThickness="3,3,3,3"/>
