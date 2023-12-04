@@ -31,12 +31,22 @@ namespace GroupAssignmentAlonColetonWannes.Common
             get { return cost; }
             set { cost = value; }
         }
+
+
+        private int? lineItemNum;
+
+        public int? LineItemNum
+        {
+            get { return lineItemNum; }
+            set { lineItemNum = value; }
+        }
         #endregion
 
-        public itemDetail(string itemCode, string itemDesc, decimal cost) { 
+        public itemDetail(string itemCode, string itemDesc, decimal cost, int? lineItemNum = null) { 
             this.itemCode = itemCode;
             this.itemDesc = itemDesc;
             this.cost = cost;
+            this.lineItemNum = lineItemNum;
         }
 
         public override string ToString() {

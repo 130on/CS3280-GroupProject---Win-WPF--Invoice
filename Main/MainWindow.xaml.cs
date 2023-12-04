@@ -47,11 +47,9 @@ namespace GroupAssignmentAlonColetonWannes
             activeInvoice = new clsMainLogic(5000);
             lbInvoiceNumber.Content += activeInvoice.getInvoiceNum();
             dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
-            dgInvoiceItemDisplay.ItemsSource = activeInvoice.GetItems();
+            dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
             txtTotalCost.Content = activeInvoice.getTotalCost();
-
-
-
+         
         }
 
         private void btnSearchScreen_Click(object sender, RoutedEventArgs e)
@@ -135,9 +133,20 @@ namespace GroupAssignmentAlonColetonWannes
             {
                 string rowKey = deleteButtonSender.Uid;
                 
-
-
             }
+        }
+
+        private void btnAddItem_Click(object sender, RoutedEventArgs e)
+        {
+            itemDetail? selectedItem = cbItemList.SelectedValue as itemDetail;
+
+            if (selectedItem != null)
+            {
+                activeInvoice.newItem(selectedItem.ItemCode);
+            }
+
+            dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
+
         }
     }
 }

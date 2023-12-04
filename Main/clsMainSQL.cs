@@ -78,7 +78,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
         /// <returns>A string to be executed</returns>
         public static string getItem(string itemCode)
         {
-            return $"select ItemCode, ItemDesc, Cost from ItemDesc WHERE = '{itemCode}'";
+            return $"select ItemCode, ItemDesc, Cost from ItemDesc WHERE ItemCode = '{itemCode}'";
         }
 
         /// <summary>

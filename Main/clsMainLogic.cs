@@ -2,7 +2,9 @@
 using GroupAssignmentAlonColetonWannes.Items;
 using GroupAssignmentAlonColetonWannes.Search;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -25,6 +27,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 int totalCost = (int)dataRow["TotalCost"];
                 activeInvoice = new invoiceDetail(invoiceNum, invoiceDate, totalCost);
             }
+            GetItems();
         }
         public string getInvoiceNum()
         {
@@ -40,22 +43,24 @@ namespace GroupAssignmentAlonColetonWannes.Main
         {
             return activeInvoice.TotalCost.ToString();
         }
+     
+        public ObservableCollection<itemDetail> getInvoiceItems()
+        {
+            return activeInvoice.InvoiceItems;
+        }
 
-        public Dictionary<int, itemDetail> GetItems()
+        public void GetItems()
         {
             string sSQL = $"SELECT LineItems.LineItemNum, LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = {activeInvoice.InvoiceNum}";
             int iItemCounter = 0;   //Number of return values
             DataSet dsInvoiceItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
+            activeInvoice.InvoiceItems.Clear();
             foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
             {
-                activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
-                activeInvoice.invoiceItemDictionary.Add((int)row["LineItemNum"], new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
+                // activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
+                activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"], (int)row["LineItemNum"]));
             }
 
-            foreach(itemDetail x in activeInvoice.invoiceItemDictionary.Values){
-
-            }
-            return activeInvoice.invoiceItemDictionary;
         }
       
 
@@ -125,6 +130,38 @@ namespace GroupAssignmentAlonColetonWannes.Main
             }
 
             return -1;
+        }
+
+
+        public int newItem(string newItemCode)
+        {
+            int lineNumber = 1;
+            ObservableCollection<itemDetail> x = new(activeInvoice.InvoiceItems.OrderBy(i => i.LineItemNum));
+            while (lineNumber <= activeInvoice.InvoiceItems.Count)
+            {
+                if (x[lineNumber - 1].LineItemNum != lineNumber)
+                {
+                    
+                    break;
+                }
+                lineNumber++;
+            }
+            //string sSQL = clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode);
+            //clsDataAccess.ExecuteNonQuery(sSQL);
+
+            string sSQL = clsMainSQL.getItem(newItemCode);
+
+            int iItem = 0;
+            string item = clsDataAccess.ExecuteScalarSQL(sSQL);
+            DataSet dsItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItem);
+            foreach (DataRow row in dsItems.Tables[0].Rows)
+            {
+                activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"], lineNumber));
+
+            }
+            //string item = clsDataAccess.ExecuteScalarSQL(sSQL);
+
+            return 0;
         }
     }
 }
