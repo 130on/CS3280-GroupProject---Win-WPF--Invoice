@@ -17,7 +17,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
-            <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2"/>
+            <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2"/>-->
+            <DataGrid x:Name="invoiceGrid" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Invoice Number" Width="*" Binding="{gridList.InvoiceNum}"/>
+                    <DataGridTextColumn Header="Invoice Date" Width="*"/>
+                    <DataGridTextColumn Header="Total Cost" Width="*"/>
+                    <DataGridTextColumn Header="Invoice Items" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Button Style="{DynamicResource MainButtonController}" x:Name="selectBtn" Grid.Column="1" Content="Select Invoice" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Click="selectBtn_Click" />
             <Button Style="{DynamicResource MainButtonController}" x:Name="clearBtn" Grid.Column="1" Content="Clear Selection" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" Click="clearBtn_Click"/>
             <Label Content="Invoice List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="128" FontWeight="Bold" FontSize="16"/>

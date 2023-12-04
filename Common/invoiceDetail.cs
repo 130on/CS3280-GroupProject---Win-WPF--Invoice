@@ -47,5 +47,10 @@ namespace GroupAssignmentAlonColetonWannes.Common
             this.invoiceDate = invoiceDate;
             this.totalCost = totalCost;
         }
+
+        public override string ToString()
+        {
+            return $"InvoiceNum: {invoiceNum} InvoiceDate: {invoiceDate} TotalCost: {totalCost}";
+        }
     }
 }

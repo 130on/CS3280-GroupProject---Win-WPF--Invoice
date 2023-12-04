@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroupAssignmentAlonColetonWannes.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,16 @@ namespace GroupAssignmentAlonColetonWannes.Search
             InitializeComponent();
             
             // loadInvoices() to datagrid 
+            List<invoiceDetail> gridList = new List<invoiceDetail>();
+            gridList = clsSearchLogic.loadInvoices();
+
+            invoiceGrid.ItemsSource = gridList;
         }
+
+
+
+
+
 
    /// <summary>
    /// handles click on select button
@@ -69,5 +79,22 @@ namespace GroupAssignmentAlonColetonWannes.Search
 
         // invoice date - loadInvoices(searchDate)
 
+        /// <summary>
+        /// displays a message with info about the error
+        /// </summary>
+        /// <param name="sClass"></param>
+        /// <param name="sMethod"></param>
+        /// <param name="sMessage"></param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
+        {
+            try
+            {
+                MessageBox.Show(sClass + "." + sMethod + " -> " + sMessage);
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
+        }
     }
 }

@@ -22,15 +22,15 @@ namespace GroupAssignmentAlonColetonWannes.Main
 
 
 
-            clsSearchSQL.loadInvoices();
-
-            clsSearchSQL.loadInvoices(5000, null, null);
+            clsSearchLogic.loadInvoices();
+            
+            clsSearchLogic.loadInvoices(5000, null, null);
             DateTime x = DateTime.Now;
-            clsSearchSQL.loadInvoices(null, x, null);
+            clsSearchLogic.loadInvoices(null, x, null);
 
-            clsSearchSQL.loadInvoices(5000, x, null);
+            clsSearchLogic.loadInvoices(5000, x, null);
 
-            clsSearchSQL.loadInvoices(null, x, 120);
+            clsSearchLogic.loadInvoices(null, x, 120);
 
             int z = 0;
 
