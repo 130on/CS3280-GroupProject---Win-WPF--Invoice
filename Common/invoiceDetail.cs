@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GroupAssignmentAlonColetonWannes.Common
 {
@@ -14,10 +17,10 @@ namespace GroupAssignmentAlonColetonWannes.Common
         private int invoiceNum;
         //invoiceDate date object (optional?)
         private DateTime invoiceDate;
-        //int totalCost
+        //int getTotalCost
         private int totalCost;
         //list of items on the list
-        private BindingList<itemDetail> invoiceItems = new();
+        private ObservableCollection<itemDetail> invoiceItems = new ();
 
         #endregion
 
@@ -35,11 +38,18 @@ namespace GroupAssignmentAlonColetonWannes.Common
         {
             get { return totalCost; }
         }
-        public BindingList<itemDetail> InvoiceItems
+        public ObservableCollection<itemDetail> InvoiceItems
         {
             get { return invoiceItems; }
         }
+
+        public ObservableCollection<itemDetail> InvoiceItemsSorted
+        {
+            get { return (ObservableCollection<itemDetail>)invoiceItems.OrderBy(i => i.LineItemNum); }
+        }
         #endregion
+
+
 
         public invoiceDetail(int invoiceNum, DateTime invoiceDate, int totalCost)
         {
