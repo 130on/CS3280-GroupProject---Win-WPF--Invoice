@@ -19,7 +19,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
             string sqlCommand = clsSearchSQL.getAllInvoices();
             // FIXME - connct to the clsSearchSQL
 
-            
+
             //if (searchInvoiceNum != null || searchDate != null || searchTotalCost != null)
             //{
             //    sSQL += "WHERE ";

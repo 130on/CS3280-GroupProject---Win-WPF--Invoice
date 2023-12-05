@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,36 +21,74 @@ namespace GroupAssignmentAlonColetonWannes.Search
     /// </summary>
     public partial class wndSearch : Window
     {
+        // var that stores the selected invoice number 
+        static int? SelectedInvoiceNum;
         public wndSearch()
         {
             InitializeComponent();
-            
-            // loadInvoices() to datagrid 
+
+            // load Invoices to Datarid 
             List<invoiceDetail> gridList = new List<invoiceDetail>();
             gridList = clsSearchLogic.loadInvoices();
-
             invoiceGrid.ItemsSource = gridList;
+
+
+            // add invoice nums to combobox
+            cbInvoiceNum.ItemsSource = gridList;
+            cbInvoiceNum.DisplayMemberPath = "InvoiceNum";
+
+            // add invoice total cost to combobox
+            cbTotalCharge.ItemsSource = gridList;
+            cbTotalCharge.DisplayMemberPath = "TotalCost";
+
+        }
+
+
+        /// <summary>
+        /// handles selection of item in Invoice Number combo box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbInvoiceNum_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
 
 
-
-
-
-   /// <summary>
-   /// handles click on select button
-   /// </summary>
-   /// <param name="sender"></param>
-   /// <param name="e"></param>
- private void selectBtn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// handles click on select button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void selectBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-            // Select invoice and store it in static var using storeId()
+            try
+            {
+                // Select invoice and store it in static var using storeId()
 
-            // pass invoice id to the mainwindow before close
+                // pass invoice id to the mainwindow before close
+
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+
             
-            this.Close();
 
         }
 
@@ -60,7 +99,17 @@ namespace GroupAssignmentAlonColetonWannes.Search
         /// <param name="e"></param>
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -70,7 +119,16 @@ namespace GroupAssignmentAlonColetonWannes.Search
         /// <param name="e"></param>
         private void clearBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         // invoice number comboBox - loadInvoices(SearchInvoicNum) 
@@ -96,5 +154,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
                 System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
         }
+
+        
     }
 }

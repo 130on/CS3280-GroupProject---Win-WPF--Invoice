@@ -18,12 +18,11 @@
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2"/>-->
-            <DataGrid x:Name="invoiceGrid" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2">
+            <DataGrid x:Name="invoiceGrid" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Invoice Number" Width="*" Binding="{gridList.InvoiceNum}"/>
-                    <DataGridTextColumn Header="Invoice Date" Width="*"/>
-                    <DataGridTextColumn Header="Total Cost" Width="*"/>
-                    <DataGridTextColumn Header="Invoice Items" Width="*"/>
+                    <DataGridTextColumn Header="Invoice Number" Width="*"  Binding="{Binding InvoiceNum}"/>
+                    <DataGridTextColumn Header="Invoice Date" Width="*" Binding="{Binding InvoiceDate}"/>
+                    <DataGridTextColumn Header="Total Cost" Width="*" Binding="{Binding TotalCost}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Style="{DynamicResource MainButtonController}" x:Name="selectBtn" Grid.Column="1" Content="Select Invoice" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Click="selectBtn_Click" />
@@ -40,10 +39,10 @@
             </Grid.ColumnDefinitions>
             <DatePicker Grid.Column="2" HorizontalAlignment="Left" Margin="129,73,0,0" VerticalAlignment="Top" Width="124" Height="39" BorderThickness="3,3,3,3"/>
 
-            <ComboBox x:Name="invoiceNum" Style="{DynamicResource ComboBoxDefault}" Grid.Column="0" IsEditable="True" DockPanel.Dock="Right" Width="100" Margin="156,80,32,38" BorderThickness="3,3,3,3"/>
+            <ComboBox x:Name="cbInvoiceNum" Style="{DynamicResource ComboBoxDefault}" Grid.Column="0" IsEditable="True" DockPanel.Dock="Right" Width="100" Margin="156,80,32,38" BorderThickness="3,3,3,3" SelectionChanged="cbInvoiceNum_SelectionChanged"/>
             <Label Grid.Column="0" Content="Invoice Number:" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="14,77,0,0" VerticalAlignment="Top" Width="137" Style="{DynamicResource BasicLabel}"/>
 
-            <ComboBox Grid.Column="1" IsEditable="True" DockPanel.Dock="Right" Margin="134,80,48,38" BorderThickness="3,3,3,3"/>
+            <ComboBox x:Name="cbTotalCharge" Grid.Column="1" IsEditable="True" DockPanel.Dock="Right" Margin="134,80,48,38" BorderThickness="3,3,3,3"/>
             <Label Grid.Column="1" Content="Total Charge:" HorizontalAlignment="Left" Margin="17,77,0,0" VerticalAlignment="Top" Width="112" Style="{DynamicResource BasicLabel}"/>
             <Label Content="Select an Invoice" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" Width="359" Grid.Column="1" FontSize="36" FontWeight="Bold" HorizontalContentAlignment="Center"/>
             <Label Style="{DynamicResource BasicLabel}" Grid.Column="2" Content="Invoice Date:" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Width="114"/>
