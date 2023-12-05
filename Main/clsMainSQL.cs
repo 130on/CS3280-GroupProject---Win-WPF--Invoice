@@ -97,7 +97,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
         /// <returns>A string the needs to be run</returns>
         public static string removeItem(int invoiceNum, int lineNumber)
         {
-            return $"DELETE FROM LineItems WHERE InvoiceNum = {invoiceNum} AND lineNumber = {lineNumber}";
+            return $"DELETE FROM LineItems WHERE InvoiceNum = {invoiceNum} AND LineItemNum = {lineNumber}";
         }
 
         /// <summary>

@@ -28,10 +28,11 @@ namespace GroupAssignmentAlonColetonWannes
     {
         private wndItems wndItemManger;
         private wndSearch wndSearchManger;
-        private bool editMode = true;
+        private bool editMode = false;
         private bool newInvoice = false;
 
         clsMainLogic? activeInvoice;
+       // private Button cmdDeleteItem;
 
         public MainWindow()
         {
@@ -83,35 +84,32 @@ namespace GroupAssignmentAlonColetonWannes
             {
 
             }
+            txtTotalCost.Content = activeInvoice.UpdateDataBase(true);
 
-            if (editMode)
+            if (!editMode)
             {
-                btnEditSaveInvoice.Content = "Save Invoice";
-                btnAddItem.IsEnabled = true;
-                editMode = true;
-                
+                setEditMode();
+
             }
-            else if(!editMode)
+            else if(editMode)
             {
-                btnEditSaveInvoice.Content = "Edit Invoice";
-                editMode = false;
+
+                setReadOnlyMode();
             }
+
         }
 
         private void btnNewInvoice_Click(object sender, RoutedEventArgs e)
         {
-            btnEditSaveInvoice.IsEnabled = true;
-            btnEditSaveInvoice.Content = "Save Invoice";
-            dpInvoiceDate.IsEnabled = true;
-            btnAddItem.IsEnabled = true;
-            editMode = true;
             newInvoice = true;
+            invoiceSelected();
         }
 
 
         private void btnCancelChanges_Click(object sender, RoutedEventArgs e)
         {
-            btnEditSaveInvoice.Content = "Edit Invoice";
+            txtTotalCost.Content = activeInvoice.UpdateDataBase(false);
+            setReadOnlyMode();
 
         }
 
@@ -128,12 +126,8 @@ namespace GroupAssignmentAlonColetonWannes
 
         private void cmdDeleteItem_Click(object sender, RoutedEventArgs e)
         {
-            Button? deleteButtonSender = sender as Button;
-            if(deleteButtonSender != null)
-            {
-                string rowKey = deleteButtonSender.Uid;
-                
-            }
+            itemDetail x = (itemDetail)dgInvoiceItemDisplay.SelectedItem;
+            txtTotalCost.Content = activeInvoice.deleteItemFromInvoice(x);
         }
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
@@ -142,11 +136,34 @@ namespace GroupAssignmentAlonColetonWannes
 
             if (selectedItem != null)
             {
-                activeInvoice.newItem(selectedItem.ItemCode);
+                txtTotalCost.Content = activeInvoice.newItem(selectedItem.ItemCode);
             }
+        }
 
-            dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
 
+        private void invoiceSelected()
+        {
+            btnEditSaveInvoice.IsEnabled = true;
+            setReadOnlyMode();
+        }
+        private void setReadOnlyMode()
+        {
+            btnEditSaveInvoice.Content = "Edit Invoice";
+            editMode = false;
+            btnAddItem.IsEnabled = false;
+            btnCancelChanges.IsEnabled = false;
+        }
+
+
+
+        private void setEditMode()
+        {
+
+            btnEditSaveInvoice.Content = "Save Invoice";
+            btnAddItem.IsEnabled = true;
+            btnAddItem.IsEnabled = true;
+            editMode = true;
+            btnCancelChanges.IsEnabled = true;
         }
     }
 }

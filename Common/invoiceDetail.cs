@@ -37,6 +37,7 @@ namespace GroupAssignmentAlonColetonWannes.Common
         public int TotalCost
         {
             get { return totalCost; }
+            set { totalCost = value; }
         }
         public ObservableCollection<itemDetail> InvoiceItems
         {
@@ -56,11 +57,6 @@ namespace GroupAssignmentAlonColetonWannes.Common
             this.invoiceNum = invoiceNum;
             this.invoiceDate = invoiceDate;
             this.totalCost = totalCost;
-        }
-
-        public override string ToString()
-        {
-            return $"InvoiceNum: {invoiceNum} InvoiceDate: {invoiceDate} TotalCost: {totalCost}";
         }
     }
 }
