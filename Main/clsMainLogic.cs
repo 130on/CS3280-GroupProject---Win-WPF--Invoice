@@ -10,17 +10,26 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace GroupAssignmentAlonColetonWannes.Main
 {
     public class clsMainLogic
     {
-        invoiceDetail activeInvoice;
+        private invoiceDetail activeInvoice;
 
         private List<string> sSQLCommands = new List<string>();
 
+        int maxInvoice = -1;
+
+
 
         public clsMainLogic(int invoiceNumber) {
+            if(invoiceNumber == -1)
+            {
+                newInvoice();
+                return;
+            }
             int iItemCounter = 0;
             DataSet dsInvoice = clsDataAccess.ExecuteSQLStatement(clsMainSQL.getInvoice(invoiceNumber), ref iItemCounter);
          
@@ -33,19 +42,28 @@ namespace GroupAssignmentAlonColetonWannes.Main
             }
             getItems();
         }
-        public string getInvoiceNum()
+
+        public void newInvoice()
         {
-            return activeInvoice.InvoiceNum.ToString();
+            activeInvoice = new invoiceDetail(-1, null, 0);
+            string sSQL = "SELECT MAX(InvoiceNum) FROM Invoices";
+            bool res = int.TryParse(clsDataAccess.ExecuteScalarSQL(sSQL), out int newestInvoiceNumber);
+
+            activeInvoice.InvoiceNum = newestInvoiceNumber+1;
+        }
+        public int getInvoiceNum()
+        {
+            return activeInvoice.InvoiceNum;
         }
 
-        public DateTime getInvoiceTime()
+        public DateTime? getInvoiceTime()
         {
             return activeInvoice.InvoiceDate;
         }
 
-        public string getTotalCost()
+        public int getTotalCost()
         {
-            return activeInvoice.TotalCost.ToString();
+            return activeInvoice.TotalCost;
         }
      
         public ObservableCollection<itemDetail> getInvoiceItems()
@@ -90,7 +108,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
      
 
 
-        public static int newInvoice(DateTime? newDateTime = null, int newTotalCost = 0)
+        public int newInvoice(DateTime? newDateTime, int newTotalCost)
         {
             string sSQL = $"INSERT INTO Invoices (InvoiceDate, TotalCost) Values (#{newDateTime}#, {newTotalCost})";
             int rowsUpdated = clsDataAccess.ExecuteNonQuery(sSQL);
@@ -99,7 +117,8 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 sSQL = "SELECT MAX(InvoiceNum) FROM Invoices";
                 bool res = int.TryParse(clsDataAccess.ExecuteScalarSQL(sSQL), out int newestInvoiceNumber);
 
-                return res ? newestInvoiceNumber : -1;
+                activeInvoice.InvoiceNum = newestInvoiceNumber;
+                return newestInvoiceNumber;
             }
 
             return -1;
@@ -136,11 +155,15 @@ namespace GroupAssignmentAlonColetonWannes.Main
         }
 
 
-        public int deleteItemFromInvoice(itemDetail deletingItem)
+        public int deleteItemFromInvoice(itemDetail deletingItem, ref bool noItems)
         {
             sSQLCommands.Add(clsMainSQL.removeItem(activeInvoice.InvoiceNum, (int)deletingItem.LineItemNum));
 
             activeInvoice.InvoiceItems.Remove(deletingItem);
+            if(activeInvoice.InvoiceItems.Count <= 0)
+            {
+                noItems = true;
+            }
             return updateTotalCost();
         }
 
@@ -180,5 +203,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
             return (int)Math.Ceiling(totalCost);
 
         }
+
+       
     }
 }

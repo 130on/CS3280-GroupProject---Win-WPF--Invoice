@@ -16,7 +16,7 @@ namespace GroupAssignmentAlonColetonWannes.Common
         //identifier int id or number
         private int invoiceNum;
         //invoiceDate date object (optional?)
-        private DateTime invoiceDate;
+        private DateTime? invoiceDate;
         //int getTotalCost
         private int totalCost;
         //list of items on the list
@@ -28,10 +28,12 @@ namespace GroupAssignmentAlonColetonWannes.Common
         public int InvoiceNum
         {
             get { return invoiceNum; }
+            set { invoiceNum = value; }
         }
-        public DateTime InvoiceDate
+        public DateTime? InvoiceDate
         {
             get { return invoiceDate; }
+            set { invoiceDate = value; }
         }
 
         public int TotalCost
@@ -52,7 +54,7 @@ namespace GroupAssignmentAlonColetonWannes.Common
 
 
 
-        public invoiceDetail(int invoiceNum, DateTime invoiceDate, int totalCost)
+        public invoiceDetail(int invoiceNum, DateTime? invoiceDate, int totalCost)
         {
             this.invoiceNum = invoiceNum;
             this.invoiceDate = invoiceDate;
