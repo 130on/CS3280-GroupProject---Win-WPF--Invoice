@@ -16,6 +16,10 @@ namespace GroupAssignmentAlonColetonWannes.Main
     public class clsMainLogic
     {
         invoiceDetail activeInvoice;
+
+        private List<string> sSQLCommands = new List<string>();
+
+
         public clsMainLogic(int invoiceNumber) {
             int iItemCounter = 0;
             DataSet dsInvoice = clsDataAccess.ExecuteSQLStatement(clsMainSQL.getInvoice(invoiceNumber), ref iItemCounter);
@@ -27,7 +31,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 int totalCost = (int)dataRow["TotalCost"];
                 activeInvoice = new invoiceDetail(invoiceNum, invoiceDate, totalCost);
             }
-            GetItems();
+            getItems();
         }
         public string getInvoiceNum()
         {
@@ -49,7 +53,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
             return activeInvoice.InvoiceItems;
         }
 
-        public void GetItems()
+        public void getItems()
         {
             string sSQL = $"SELECT LineItems.LineItemNum, LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = {activeInvoice.InvoiceNum}";
             int iItemCounter = 0;   //Number of return values
@@ -57,7 +61,6 @@ namespace GroupAssignmentAlonColetonWannes.Main
             activeInvoice.InvoiceItems.Clear();
             foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
             {
-                // activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
                 activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"], (int)row["LineItemNum"]));
             }
 
@@ -84,37 +87,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
         }
 
 
-        public static List<itemDetail> invoiceItemsList(int invoiceNumber)
-        {
-            string sSQL = $"SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = {invoiceNumber}";
-            int iItemCounter = 0;   //Number of return values
-            DataSet dsInvoiceItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
-            List<itemDetail> invoiceItems = new();
-            foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
-            {
-                invoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
-
-            }
-            return invoiceItems;
-        }
-
-
-
-        public static Dictionary<int, string> mightUseInstead(int invoiceNumber)
-        {
-            string sSQL = $"Select LineItemNum, ItemCode FROM LineItems WHERE InvoiceNum = {invoiceNumber}";
-            int iItemCounter = 0;   //Number of return values
-            DataSet dsInvoiceItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItemCounter);
-            Dictionary<int, string> invoiceItems = new();
-            foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
-            {
-                int lineItemNum = (int)row["LineItemNum"];
-                string ItemCode = (string)row["ItemCode"];
-                invoiceItems.Add(lineItemNum, ItemCode);
-            }
-
-            return invoiceItems;
-        }
+     
 
 
         public static int newInvoice(DateTime? newDateTime = null, int newTotalCost = 0)
@@ -146,13 +119,11 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 }
                 lineNumber++;
             }
-            //string sSQL = clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode);
-            //clsDataAccess.ExecuteNonQuery(sSQL);
+            sSQLCommands.Add(clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode));
 
             string sSQL = clsMainSQL.getItem(newItemCode);
 
             int iItem = 0;
-            string item = clsDataAccess.ExecuteScalarSQL(sSQL);
             DataSet dsItems = clsDataAccess.ExecuteSQLStatement(sSQL, ref iItem);
             foreach (DataRow row in dsItems.Tables[0].Rows)
             {
@@ -161,7 +132,53 @@ namespace GroupAssignmentAlonColetonWannes.Main
             }
             //string item = clsDataAccess.ExecuteScalarSQL(sSQL);
 
-            return 0;
+            return updateTotalCost();
+        }
+
+
+        public int deleteItemFromInvoice(itemDetail deletingItem)
+        {
+            sSQLCommands.Add(clsMainSQL.removeItem(activeInvoice.InvoiceNum, (int)deletingItem.LineItemNum));
+
+            activeInvoice.InvoiceItems.Remove(deletingItem);
+            return updateTotalCost();
+        }
+
+
+        public int UpdateDataBase(bool update)
+        {
+            if (update)
+            {
+                int i = 0;
+                foreach (string sSQL in sSQLCommands)
+                {
+                    i += clsDataAccess.ExecuteNonQuery(sSQL);
+                }
+            }
+            else
+            {
+                getItems();
+            }
+            sSQLCommands.Clear();
+
+            int totalCost = updateTotalCost();
+            clsDataAccess.ExecuteNonQuery(clsMainSQL.updateTotalCost(activeInvoice.InvoiceNum, activeInvoice.TotalCost));
+            return totalCost;
+        }
+
+      
+
+
+        private int updateTotalCost()
+        {
+            decimal totalCost = 0;
+            foreach(itemDetail item in activeInvoice.InvoiceItems)
+            {
+                totalCost += item.Cost;
+            }
+            activeInvoice.TotalCost = (int)Math.Ceiling(totalCost);
+            return (int)Math.Ceiling(totalCost);
+
         }
     }
 }
