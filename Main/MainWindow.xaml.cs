@@ -49,7 +49,10 @@ namespace GroupAssignmentAlonColetonWannes
         {
             btnEditSaveInvoice.IsEnabled = false;
             txtItemCost.Text = "";
-            cbItemList.ItemsSource = clsMainLogic.getItemList();
+            cbItemList.ItemsSource = null;
+
+            lbInvoiceNumber.Content = "Invoice Number: ";
+            dpInvoiceDate.SelectedDate = null;
             txtTotalCost.Content = "";
             setReadOnlyMode();
         }
@@ -61,7 +64,7 @@ namespace GroupAssignmentAlonColetonWannes
             dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
             dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
             txtTotalCost.Content = activeInvoice.getTotalCost();
-
+            cbItemList.ItemsSource = clsMainLogic.getItemList();
             btnEditSaveInvoice.Content = "Edit Invoice";
             btnEditSaveInvoice.IsEnabled = true;
 

@@ -20,7 +20,6 @@ namespace GroupAssignmentAlonColetonWannes.Main
 
         private List<string> sSQLCommands = new List<string>();
 
-        int maxInvoice = -1;
 
 
 
