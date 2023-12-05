@@ -40,17 +40,34 @@ namespace GroupAssignmentAlonColetonWannes
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
-            //Test Statement to test sql access 
-            btnEditSaveInvoice.Content = "Edit Invoice";
+            setDefaults();
+             
+         
+        }
+
+        public void setDefaults()
+        {
+            btnEditSaveInvoice.IsEnabled = false;
             txtItemCost.Text = "";
-            cbItemList.ItemsSource = clsMainLogic.getItemList();
-            txtTotalCost.Content = 0;
-            activeInvoice = new clsMainLogic(5000);
-            lbInvoiceNumber.Content += activeInvoice.getInvoiceNum();
+            cbItemList.ItemsSource = null;
+
+            lbInvoiceNumber.Content = "Invoice Number: ";
+            dpInvoiceDate.SelectedDate = null;
+            txtTotalCost.Content = "";
+            setReadOnlyMode();
+        }
+
+        public void setInvoice(int selectedInvoice = 5000)
+        {
+            activeInvoice = new clsMainLogic(selectedInvoice);
+            lbInvoiceNumber.Content = $"Invoice Number: {activeInvoice.getInvoiceNum()}";
             dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
             dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
             txtTotalCost.Content = activeInvoice.getTotalCost();
-         
+            cbItemList.ItemsSource = clsMainLogic.getItemList();
+            btnEditSaveInvoice.Content = "Edit Invoice";
+            btnEditSaveInvoice.IsEnabled = true;
+
         }
 
         private void btnSearchScreen_Click(object sender, RoutedEventArgs e)
@@ -59,6 +76,8 @@ namespace GroupAssignmentAlonColetonWannes
             this.Hide();
             
             wndSearchManger.ShowDialog();
+
+            setInvoice();
             //check clsSearchLogic if there is a change has been made. 
             //And or get the return variable from wndSearch
 
@@ -82,6 +101,11 @@ namespace GroupAssignmentAlonColetonWannes
         {
             if (newInvoice)
             {
+                dpInvoiceDate.IsEnabled = false; 
+
+                int newInvoiceNumber = activeInvoice.newInvoice(dpInvoiceDate.SelectedDate, activeInvoice.getTotalCost());
+                lbInvoiceNumber.Content = $"Invoice Number: {newInvoiceNumber}";
+                newInvoice = false;
 
             }
             txtTotalCost.Content = activeInvoice.UpdateDataBase(true);
@@ -93,7 +117,6 @@ namespace GroupAssignmentAlonColetonWannes
             }
             else if(editMode)
             {
-
                 setReadOnlyMode();
             }
 
@@ -102,32 +125,52 @@ namespace GroupAssignmentAlonColetonWannes
         private void btnNewInvoice_Click(object sender, RoutedEventArgs e)
         {
             newInvoice = true;
-            invoiceSelected();
+            dpInvoiceDate.IsEnabled = true;
+            setInvoice(-1);
+            lbInvoiceNumber.Content = $"Invoice Number: TBD";
+            setEditMode();
+            btnEditSaveInvoice.IsEnabled = false;
         }
 
 
         private void btnCancelChanges_Click(object sender, RoutedEventArgs e)
         {
-            txtTotalCost.Content = activeInvoice.UpdateDataBase(false);
-            setReadOnlyMode();
+            if(newInvoice)
+            {
+                setDefaults();
+            }
+            else
+            {
+                txtTotalCost.Content = activeInvoice.UpdateDataBase(false);
+                setReadOnlyMode();
+            }
+           
 
         }
 
         private void cbItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             itemDetail x = (itemDetail)cbItemList.SelectedItem;
-            txtItemCost.Text = x.Cost.ToString();
+            if(x != null)
+            {
+                txtItemCost.Text = x.Cost.ToString();
+            }
+
         }
 
         private void dpInvoiceDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            dpInvoiceDate.IsEnabled = false;
+            btnEditSaveInvoice.IsEnabled = dgInvoiceItemDisplay.Items.Count > 0 && dpInvoiceDate.SelectedDate != null;
         }
+    
 
         private void cmdDeleteItem_Click(object sender, RoutedEventArgs e)
         {
+            bool noItems = false;
             itemDetail x = (itemDetail)dgInvoiceItemDisplay.SelectedItem;
-            txtTotalCost.Content = activeInvoice.deleteItemFromInvoice(x);
+            txtTotalCost.Content = activeInvoice.deleteItemFromInvoice(x, ref noItems);
+           
+            btnEditSaveInvoice.IsEnabled = !noItems && dpInvoiceDate.SelectedDate != null;         
         }
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
@@ -137,15 +180,12 @@ namespace GroupAssignmentAlonColetonWannes
             if (selectedItem != null)
             {
                 txtTotalCost.Content = activeInvoice.newItem(selectedItem.ItemCode);
+                btnEditSaveInvoice.IsEnabled = true && dpInvoiceDate.SelectedDate != null;
             }
         }
 
 
-        private void invoiceSelected()
-        {
-            btnEditSaveInvoice.IsEnabled = true;
-            setReadOnlyMode();
-        }
+      
         private void setReadOnlyMode()
         {
             btnEditSaveInvoice.Content = "Edit Invoice";
@@ -161,9 +201,14 @@ namespace GroupAssignmentAlonColetonWannes
 
             btnEditSaveInvoice.Content = "Save Invoice";
             btnAddItem.IsEnabled = true;
-            btnAddItem.IsEnabled = true;
             editMode = true;
             btnCancelChanges.IsEnabled = true;
+            if(dgInvoiceItemDisplay.Items.Count < 0)
+            {
+                btnEditSaveInvoice.IsEnabled = false;
+            }
         }
+
+       
     }
 }
