@@ -203,8 +203,8 @@ namespace GroupAssignmentAlonColetonWannes.Search
             try
             {
                 // clear all fields in select window
-                loadWindow();
                 dpInvoiceDate.SelectedDate = null;
+                loadWindow();
             }
             catch (Exception ex)
             {

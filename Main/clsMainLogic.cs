@@ -126,17 +126,13 @@ namespace GroupAssignmentAlonColetonWannes.Main
 
         public int newItem(string newItemCode)
         {
-            int lineNumber = 1;
             ObservableCollection<itemDetail> x = new(activeInvoice.InvoiceItems.OrderBy(i => i.LineItemNum));
-            while (lineNumber <= activeInvoice.InvoiceItems.Count)
-            {
-                if (x[lineNumber - 1].LineItemNum != lineNumber)
-                {
-                    
-                    break;
-                }
-                lineNumber++;
+            itemDetail? y = x.LastOrDefault();
+            int lineNumber = 1;
+            if (y != null ) {
+                lineNumber = (int)y.LineItemNum + 1;
             }
+
             sSQLCommands.Add(clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode));
 
             string sSQL = clsMainSQL.getItem(newItemCode);

@@ -39,6 +39,7 @@ namespace GroupAssignmentAlonColetonWannes
 
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            cbItemList.ItemsSource = clsMainLogic.getItemList();
 
             setDefaults();
              
@@ -48,8 +49,8 @@ namespace GroupAssignmentAlonColetonWannes
         public void setDefaults()
         {
             btnEditSaveInvoice.IsEnabled = false;
-            cbItemList.ItemsSource = null;
-
+            cbItemList.SelectedIndex = -1;
+            dgInvoiceItemDisplay.ItemsSource = null;
             lbInvoiceNumber.Content = "Select or Create an Invoice";
             dpInvoiceDate.SelectedDate = null;
             txtTotalCost.Content = "";
@@ -70,9 +71,8 @@ namespace GroupAssignmentAlonColetonWannes
             dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
             dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
             txtTotalCost.Content = activeInvoice.getTotalCost();
-            cbItemList.ItemsSource = clsMainLogic.getItemList();
-            btnEditSaveInvoice.Content = "Edit Invoice";
             btnEditSaveInvoice.IsEnabled = true;
+            setReadOnlyMode();
 
         }
 
