@@ -44,7 +44,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
         private void loadWindow()
         {
             invoiceGrid.ItemsSource = null;
-
+            SelectedInvoiceNum = null;
             // loads the data from DB into datagrid and combo boxes
             gridList = clsSearchLogic.loadList();
             invoiceGrid.ItemsSource = gridList;
