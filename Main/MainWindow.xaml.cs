@@ -48,18 +48,24 @@ namespace GroupAssignmentAlonColetonWannes
         public void setDefaults()
         {
             btnEditSaveInvoice.IsEnabled = false;
-            txtItemCost.Text = "";
             cbItemList.ItemsSource = null;
 
-            lbInvoiceNumber.Content = "Invoice Number: ";
+            lbInvoiceNumber.Content = "Select or Create an Invoice";
             dpInvoiceDate.SelectedDate = null;
             txtTotalCost.Content = "";
             setReadOnlyMode();
         }
 
-        public void setInvoice(int selectedInvoice)
+     
+
+        public void setInvoice(int? selectedInvoice)
         {
-            activeInvoice = new clsMainLogic(selectedInvoice);
+            if(selectedInvoice == null)
+            {
+                setDefaults();
+                return;
+            }
+            activeInvoice = new clsMainLogic((int)selectedInvoice);
             lbInvoiceNumber.Content = $"Invoice Number: {activeInvoice.getInvoiceNum()}";
             dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
             dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
@@ -154,6 +160,10 @@ namespace GroupAssignmentAlonColetonWannes
             if(x != null)
             {
                 txtItemCost.Text = x.Cost.ToString();
+            }
+            else
+            {
+                txtItemCost.Text = "";
             }
 
         }
