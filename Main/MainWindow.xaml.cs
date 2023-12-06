@@ -48,7 +48,6 @@ namespace GroupAssignmentAlonColetonWannes
         public void setDefaults()
         {
             btnEditSaveInvoice.IsEnabled = false;
-            txtItemCost.Text = "";
             cbItemList.ItemsSource = null;
 
             lbInvoiceNumber.Content = "Select or Create an Invoice";
@@ -57,17 +56,7 @@ namespace GroupAssignmentAlonColetonWannes
             setReadOnlyMode();
         }
 
-        public void setNewInvoice()
-        {
-            btnEditSaveInvoice.IsEnabled = false;
-            txtItemCost.Text = "";
-            cbItemList.ItemsSource = null;
-
-            lbInvoiceNumber.Content = "Invoice Number: ";
-            dpInvoiceDate.SelectedDate = null;
-            txtTotalCost.Content = "";
-            setReadOnlyMode();
-        }
+     
 
         public void setInvoice(int? selectedInvoice)
         {
@@ -171,6 +160,10 @@ namespace GroupAssignmentAlonColetonWannes
             if(x != null)
             {
                 txtItemCost.Text = x.Cost.ToString();
+            }
+            else
+            {
+                txtItemCost.Text = "";
             }
 
         }
