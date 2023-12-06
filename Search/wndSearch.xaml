@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2"/>-->
-            <DataGrid x:Name="invoiceGrid" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2" AutoGenerateColumns="False" SelectionChanged="invoiceGrid_SelectionChanged">
+            <DataGrid x:Name="invoiceGrid" Margin="10,36,10,10" FontSize="14" BorderThickness="2,2,2,2" AutoGenerateColumns="False" SelectionChanged="invoiceGrid_SelectionChanged" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Invoice Number" Width="*"  Binding="{Binding InvoiceNum}"/>
                     <DataGridTextColumn Header="Invoice Date" Width="*" Binding="{Binding InvoiceDate}"/>

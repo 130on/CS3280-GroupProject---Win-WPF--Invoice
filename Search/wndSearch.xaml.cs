@@ -26,7 +26,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
         private invoiceDetail? selectedInvoice;
 
         // var that stores the selected invoice number 
-        public static int SelectedInvoiceNum { get; private set; }
+        public static int? SelectedInvoiceNum { get; private set; }
 
         // declare the binding list that holds the invoice objects
         private BindingList<invoiceDetail> gridList = new BindingList<invoiceDetail>();
