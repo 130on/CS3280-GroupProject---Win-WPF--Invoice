@@ -57,7 +57,7 @@ namespace GroupAssignmentAlonColetonWannes
             setReadOnlyMode();
         }
 
-        public void setInvoice(int selectedInvoice = 5000)
+        public void setInvoice(int selectedInvoice)
         {
             activeInvoice = new clsMainLogic(selectedInvoice);
             lbInvoiceNumber.Content = $"Invoice Number: {activeInvoice.getInvoiceNum()}";
@@ -77,7 +77,7 @@ namespace GroupAssignmentAlonColetonWannes
             
             wndSearchManger.ShowDialog();
 
-            setInvoice();
+            setInvoice(wndSearch.SelectedInvoiceNum);
             //check clsSearchLogic if there is a change has been made. 
             //And or get the return variable from wndSearch
 
