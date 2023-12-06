@@ -60,6 +60,5 @@ namespace GroupAssignmentAlonColetonWannes.Common
             this.invoiceDate = invoiceDate;
             this.totalCost = totalCost;
         }
-
     }
 }
