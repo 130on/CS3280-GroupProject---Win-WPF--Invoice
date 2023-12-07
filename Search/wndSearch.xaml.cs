@@ -67,8 +67,11 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                // clear selection from the Total Charge combo box
+                cbTotalCharge.SelectedItem = null;
+
                 if (cbInvoiceNum.SelectedItem != null)
-                {
+                {   
                     // Store the current combo box value in a variable
                     int selectedNum = ((invoiceDetail)cbInvoiceNum.SelectedItem).InvoiceNum;
 
@@ -93,6 +96,8 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                
+                
                 // filter results if only a total cost is selected
                 if (cbTotalCharge.SelectedItem != null && dpInvoiceDate.SelectedDate == null)
                 {
@@ -100,6 +105,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
                     int selectedCost = ((invoiceDetail)cbTotalCharge.SelectedItem).TotalCost;
                     // display filtered results in datagrid
                     invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, null);
+
                 }
                 
                 // filter results in datagrid if both date and total cost are selected
@@ -120,6 +126,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
                     // display filtered results in datagrid
                     invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(null, selectedDate);
                 }
+                
             }
 
             catch (Exception ex)
@@ -162,11 +169,14 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
-                // Extract the selected invoice number from the datagrid invoice object and assign
-                // it to the static var to be passed to mainWindow
-                SelectedInvoiceNum = selectedInvoice.InvoiceNum;
+               // check that the user selected an invoice in the datagrid
+                if (selectedInvoice != null) {
+                    // Extract the selected invoice number from the datagrid invoice object and assign
+                    // it to the static var to be passed to mainWindow 
+                    SelectedInvoiceNum = selectedInvoice.InvoiceNum;
                 
-                this.Close();
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -203,8 +213,9 @@ namespace GroupAssignmentAlonColetonWannes.Search
             try
             {
                 // clear all fields in select window
-                loadWindow();
                 dpInvoiceDate.SelectedDate = null;
+                
+                loadWindow();
             }
             catch (Exception ex)
             {
