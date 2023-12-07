@@ -16,9 +16,8 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgInvoiceItemDisplay" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Margin="10,10,10,1" Grid.Row="1" AlternationCount="1" AlternatingRowBackground="#FFE6E6E6" GridLinesVisibility="Horizontal" CanUserResizeRows="False" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgInvoiceItemDisplay" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Margin="10,10,10,1" Grid.Row="1" AlternationCount="1" AlternatingRowBackground="#FFE6E6E6" GridLinesVisibility="Horizontal" CanUserResizeRows="False" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ItemRow" Binding="{Binding Path= LineItemNum}" Width="0.5*" SortDirection="Ascending"/>
                 <DataGridTextColumn Header="ItemCode" Binding="{Binding Path= ItemCode}" Width="0.5*"/>
                 <DataGridTextColumn Header="ItemDesc" Binding="{Binding Path= ItemDesc}" Width="2*"/>
                 <DataGridTextColumn Header="Cost" Binding="{Binding Path= Cost}" Width="1*"/>
