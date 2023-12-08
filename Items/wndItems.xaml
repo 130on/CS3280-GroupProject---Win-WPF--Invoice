@@ -32,27 +32,18 @@
 
         <Grid Margin="0,50,0,0">
             <Grid.ColumnDefinitions>
-                <!-- Two columns for each label-textbox pair -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Column for Label -->
                 <ColumnDefinition Width="*"/>
-                <!-- Column for TextBox -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Column for Label -->
                 <ColumnDefinition Width="*"/>
-                <!-- Column for TextBox -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Column for Label -->
                 <ColumnDefinition Width="*"/>
-                <!-- Column for TextBox -->
             </Grid.ColumnDefinitions>
 
-            <!-- Labels -->
             <Label Content="Code" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Cost" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Description" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <!-- TextBoxes -->
             <TextBox x:Name="txtCode" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False"/>
             <TextBox x:Name="txtCost" Grid.Column="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEnabled="False"/>
             <TextBox x:Name="txtDescription" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEnabled="False"/>
