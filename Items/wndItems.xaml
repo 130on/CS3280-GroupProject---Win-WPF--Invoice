@@ -21,8 +21,8 @@
         <DataGrid Grid.Row="1" Margin="10,10,10,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Code" Binding="{Binding Code}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -43,11 +43,13 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MainButtonController}"/>
-            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MainButtonController}" />
-            <Button x:Name="btnDeleteItem" Grid.Row="2" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Style="{DynamicResource MainButtonController}"/>
+            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20"/>
+            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
+            <Button x:Name="btnDeleteItem" Grid.Row="2" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
+            <Button x:Name="btnSaveItem" Grid.Row="3" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100"/>
 
 
         </Grid>
