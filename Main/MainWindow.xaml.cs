@@ -148,18 +148,19 @@ namespace GroupAssignmentAlonColetonWannes
                     int newInvoiceNumber = activeInvoice.newInvoice(dpInvoiceDate.SelectedDate, activeInvoice.getTotalCost());
                     lbInvoiceNumber.Content = $"Invoice Number: {newInvoiceNumber}";
                     newInvoice = false;
-
+                    btnItemWindow.IsEnabled = true;
                 }
                 txtTotalCost.Content = activeInvoice.UpdateDataBase(true);
 
                 if (!editMode)
                 {
                     setEditMode();
-
+                    btnItemWindow.IsEnabled = false;
                 }
                 else if (editMode)
                 {
                     setReadOnlyMode();
+                    btnItemWindow.IsEnabled = true;
                 }
 
             }
@@ -175,6 +176,7 @@ namespace GroupAssignmentAlonColetonWannes
 
             try
             {
+                btnItemWindow.IsEnabled = false;
                 newInvoice = true;
                 dpInvoiceDate.IsEnabled = true;
                 setInvoice(-1);
@@ -196,10 +198,13 @@ namespace GroupAssignmentAlonColetonWannes
 
             try
             {
+                // Enable editing the item list
+                btnItemWindow.IsEnabled = true;
 
                 if (newInvoice)
                 {
                     setDefaults();
+
                 }
                 else
                 {
