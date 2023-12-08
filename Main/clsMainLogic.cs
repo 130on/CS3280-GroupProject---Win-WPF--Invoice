@@ -126,7 +126,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 activeInvoice.InvoiceItems.Clear();
                 foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
                 {
-                    activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
+                    activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"], (int)row["LineItemNum"]));
                 }
             }
             catch (Exception ex)
@@ -196,10 +196,13 @@ namespace GroupAssignmentAlonColetonWannes.Main
             try
             {
                 ObservableCollection<itemDetail> x = new(activeInvoice.InvoiceItems.OrderBy(i => i.LineItemNum));
-                itemDetail? lastInvoice = x.LastOrDefault();
  
-                int lineNumber = lastInvoice != null? (int)lastInvoice.LineItemNum + 1: 1;
-                
+                itemDetail? lastInvoice = x.LastOrDefault();
+                int lineNumber = 1;
+                if (lastInvoice != null)
+                {
+                    lineNumber = (int)lastInvoice.LineItemNum + 1;
+                }
                 sSQLCommands.Add(clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode));
 
                 string sSQL = clsMainSQL.getItem(newItemCode);
