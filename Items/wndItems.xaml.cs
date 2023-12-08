@@ -35,6 +35,15 @@ namespace GroupAssignmentAlonColetonWannes.Items
 
         BindingList<itemDetail> Items;
 
+        private enum eCurrentMode
+        {
+            ViewItems,
+            AddItem,
+            EditItem
+        }
+
+        private eCurrentMode CurrentMode;
+
         public wndItems()
         {
             try
@@ -44,6 +53,9 @@ namespace GroupAssignmentAlonColetonWannes.Items
                 ItemModified = false;
 
                 ItemsLogic = new clsItemsLogic();
+
+
+                CurrentMode = eCurrentMode.ViewItems;
 
                 LoadItems();
             } 
@@ -68,6 +80,8 @@ namespace GroupAssignmentAlonColetonWannes.Items
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
+        
 
 
     }
