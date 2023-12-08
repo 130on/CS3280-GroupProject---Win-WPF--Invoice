@@ -5,6 +5,11 @@
              StartupUri="Main/MainWindow.xaml">
 
     <Application.Resources>
-        <ResourceDictionary Source="BasicDictonary.xaml"></ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="BasicDictonary.xaml" />
+                <ResourceDictionary Source="ShinyDarkPurpleTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -25,23 +25,36 @@ namespace GroupAssignmentAlonColetonWannes.Search
         /// <returns>returns a bindingList that contains all rows from Invoices table </returns>
         public static BindingList<invoiceDetail> loadInvoices(int? searchInvoiceNum = null, DateTime? searchDate = null, int? searchTotalCost = null)
         {
-            // number of dataset rows
-            int iInvoices = 0;
-
-            string sqlCommand = clsSearchSQL.getAllInvoices();
-
-            DataSet dsInvoices = clsDataAccess.ExecuteSQLStatement(sqlCommand, ref iInvoices);
-
-            BindingList<invoiceDetail> selectedItem = new();
-            foreach (DataRow dataRow in dsInvoices.Tables[0].Rows)
+            try
             {
-                int invoiceNum = (int)dataRow["InvoiceNum"];
-                DateTime invoiceDate = (DateTime)dataRow["InvoiceDate"];
-                int totalCost = (int)dataRow["TotalCost"];
-                selectedItem.Add(new invoiceDetail(invoiceNum, invoiceDate, totalCost));
-            }
+                // number of dataset rows
+                int iInvoices = 0;
 
-            return selectedItem;
+                // var to hold the sql statement 
+                string sqlCommand = clsSearchSQL.getAllInvoices();
+
+                // dataset that hold the sql query result
+                DataSet dsInvoices = clsDataAccess.ExecuteSQLStatement(sqlCommand, ref iInvoices);
+
+                // bindingList that will hold the query rows as objects
+                BindingList<invoiceDetail> selectedItem = new();
+
+                // iterate over the the dataset and store the rows in the bindinglist
+                foreach (DataRow dataRow in dsInvoices.Tables[0].Rows)
+                {
+                    int invoiceNum = (int)dataRow["InvoiceNum"];
+                    DateTime invoiceDate = (DateTime)dataRow["InvoiceDate"];
+                    int totalCost = (int)dataRow["TotalCost"];
+                    selectedItem.Add(new invoiceDetail(invoiceNum, invoiceDate, totalCost));
+                }
+
+                return selectedItem;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -73,9 +86,13 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                // declare a bindingList to hold the sorted list
                 BindingList<invoiceDetail> sortedList;
+
+                // sort the list using LINQ and order it by total cost from small to large
                 sortedList = new BindingList<invoiceDetail>(gridInvoiceList.OrderBy(item => item.TotalCost).ToList());
 
+                // return a list of total cost sorted in ascending order and displaying distinct values
                 return displayDistinctTot(sortedList);
             }
             catch (Exception ex)
@@ -93,6 +110,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                // Declare a bindinglist to hold the distinct list and use LINQ that takes the sorted list and return a list of distince values
                 var distinctList = new BindingList<invoiceDetail>(
                         list
                             .GroupBy(invoice => invoice.TotalCost)  // Group by TotalCost
@@ -116,9 +134,11 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                // declare a filtered bindingList using LINQ method that filters based on invoice number selected by the user
                 var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
                         (invoice => invoice.InvoiceNum == invoiceNum).Distinct().ToList());
 
+                // return a filtered list that will be used to display results in the datagrid
                 return filteredList;
             }
             catch (Exception ex)
@@ -136,13 +156,17 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                // filter datagrid list based on user's total cost choice
                 if (totalCost != null && date == null)
                 {
+                    // declare a filtered bindingList using LINQ method that filters based on total cost and date selected by the user
                     var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
                             (invoice => invoice.TotalCost == totalCost).Distinct().ToList());
-
+                    
+                    // return a filtered list that will be used to display results in the datagrid
                     return filteredList;
                 }
+                // filter datagrid list based on user's date input 
                 else if (totalCost == null && date != null)
                 {
                     var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
@@ -150,6 +174,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
 
                     return filteredList;
                 }
+                // // filter datagrid list based on user's total cost choice and date input 
                 else
                 {
                     var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.
