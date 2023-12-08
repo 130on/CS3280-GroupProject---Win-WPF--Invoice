@@ -77,6 +77,8 @@ namespace GroupAssignmentAlonColetonWannes.Items
 
                 dgItems.ItemsSource = Items;
 
+                txtError.Text = "";
+
             }
             catch (Exception ex)
             {
@@ -105,6 +107,8 @@ namespace GroupAssignmentAlonColetonWannes.Items
 
                 btnUpdateItem.IsEnabled = true;
                 btnDeleteItem.IsEnabled = true;
+
+                txtError.Text = "";
             } 
             catch (Exception ex)
             {
@@ -128,10 +132,6 @@ namespace GroupAssignmentAlonColetonWannes.Items
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
-
-        
-
-
 
         
 
@@ -344,6 +344,43 @@ namespace GroupAssignmentAlonColetonWannes.Items
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        private void btnDeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                List<string> InvoicesWithItem = ItemsLogic.GetInvoicesWithItemCode(SelectedItem);
+
+                if (InvoicesWithItem.Count > 0)
+                {
+                    string ErrorMessage = "Item cannot be deleted, it is on the following invoices: ";
+
+                    foreach (string InvoiceNumber in InvoicesWithItem)
+                    {
+                        ErrorMessage += InvoiceNumber + " ";
+                    }
+
+                    txtError.Text = ErrorMessage;
+                }
+
+
+                else
+                {
+                    ItemsLogic.DeleteItem(SelectedItem);
+
+                    //Set local variable to true for MainWindow
+                    ItemModified = true;
+
+                    LoadItems();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 

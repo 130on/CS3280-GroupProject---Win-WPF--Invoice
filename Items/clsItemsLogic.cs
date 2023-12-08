@@ -57,7 +57,7 @@ namespace GroupAssignmentAlonColetonWannes.Items
 
                 string sSQL = clsItemsSQL.AddItem(Item.ItemCode, Item.ItemDesc, Item.Cost.ToString());
 
-                int iReturnValues = 0;
+                
 
                clsDataAccess.ExecuteNonQuery(sSQL);
 
@@ -76,7 +76,58 @@ namespace GroupAssignmentAlonColetonWannes.Items
             {
                 string sSQL = clsItemsSQL.UpdateItem(OldItem.ItemCode, NewItem.ItemDesc, NewItem.Cost.ToString());
 
+
+                clsDataAccess.ExecuteNonQuery(sSQL);
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
+        }
+
+        public List<string> GetInvoicesWithItemCode(itemDetail Item)
+        {
+            try
+            {
+                List<string> Invoices = new List<string>();
+
+                DataSet ds;
+
+                string sSQL = clsItemsSQL.GetInvoicesWithItemCode(Item.ItemCode);
+
                 int iReturnValues = 0;
+
+                ds = clsDataAccess.ExecuteSQLStatement(sSQL, ref iReturnValues);
+
+                if (iReturnValues > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        Invoices.Add(row["InvoiceNum"].ToString());
+                    }
+                }
+
+                
+
+                return Invoices;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+
+        public void DeleteItem(itemDetail Item)
+        {
+            try
+            {
+                string sSQL = clsItemsSQL.DeleteItem(Item.ItemCode);
 
                 clsDataAccess.ExecuteNonQuery(sSQL);
 
