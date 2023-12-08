@@ -126,7 +126,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 activeInvoice.InvoiceItems.Clear();
                 foreach (DataRow row in dsInvoiceItems.Tables[0].Rows)
                 {
-                    activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"], (int)row["LineItemNum"]));
+                    activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"]));
                 }
             }
             catch (Exception ex)
