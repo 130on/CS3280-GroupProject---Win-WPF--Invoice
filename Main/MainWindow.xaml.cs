@@ -124,10 +124,7 @@ namespace GroupAssignmentAlonColetonWannes
                 wndItemManger.ShowDialog();
                 if (wndItemManger.ItemModified)
                 {
-                    clsMainLogic.getItemList();
                     cbItemList.ItemsSource = clsMainLogic.getItemList();
-
-
                 }
 
                 this.Show();
