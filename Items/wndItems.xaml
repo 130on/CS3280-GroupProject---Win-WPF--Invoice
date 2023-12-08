@@ -69,7 +69,7 @@
             </Grid.RowDefinitions>
 
             <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Click="btnAddItem_Click"/>
-            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False"/>
+            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False" Click="btnUpdateItem_Click"/>
             <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False"/>
             <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100" IsEnabled="False" Click="btnSaveItem_Click"/>
             <Button x:Name="btnCancel" Grid.Row="4" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100" Click="btnCancel_Click"/>

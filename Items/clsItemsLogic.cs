@@ -69,6 +69,26 @@ namespace GroupAssignmentAlonColetonWannes.Items
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
+        public void UpdateItem(itemDetail OldItem, itemDetail NewItem)
+        {
+            try
+            {
+                string sSQL = clsItemsSQL.UpdateItem(OldItem.ItemCode, NewItem.ItemDesc, NewItem.Cost.ToString());
+
+                int iReturnValues = 0;
+
+                clsDataAccess.ExecuteNonQuery(sSQL);
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
+        }
             
     }
 }

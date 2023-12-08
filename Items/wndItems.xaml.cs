@@ -129,50 +129,7 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
-        private void EnableControls()
-        {
-            try
-            {
-                switch(CurrentMode)
-                {
-                    case eCurrentMode.AddItem:
-                        txtCode.IsEnabled = true;
-                        txtDescription.IsEnabled = true;
-                        txtCost.IsEnabled = true;
-
-                        txtCode.Text = "";
-                        txtDescription.Text = "";
-                        txtCost.Text = "";
-
-                        btnAddItem.IsEnabled = false;
-                        btnUpdateItem.IsEnabled = false;
-                        btnDeleteItem.IsEnabled = false;
-                        btnSaveItem.IsEnabled = true;
-
-                        dgItems.IsEnabled = false;
-                        
-                        break;
-
-                    case eCurrentMode.ViewItems:
-                        txtCode.IsEnabled = false;
-                        txtDescription.IsEnabled = false;
-                        txtCost.IsEnabled = false;
-
-                        btnAddItem.IsEnabled = true;
-                        btnUpdateItem.IsEnabled = false;
-                        btnDeleteItem.IsEnabled = false;
-                        btnSaveItem.IsEnabled = false;
-
-                        dgItems.IsEnabled = true;
-
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
+        
 
 
 
@@ -202,7 +159,57 @@ namespace GroupAssignmentAlonColetonWannes.Items
                         }
 
                         break;
+
+                    case eCurrentMode.EditItem:
+
+                        if(ValidateInput())
+                        {
+                            itemDetail NewItem = new itemDetail(txtCode.Text, txtDescription.Text, decimal.Parse(txtCost.Text));
+
+                            ItemsLogic.UpdateItem(SelectedItem, NewItem);
+
+                            //Set local variable to true for MainWindow
+                            ItemModified = true;
+
+                            CurrentMode = eCurrentMode.ViewItems;
+
+                            EnableControls();
+                            LoadItems();
+                        }
+
+                        break;
                 }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        
+
+        private void btnUpdateItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CurrentMode = eCurrentMode.EditItem;
+
+                EnableControls();
+
+
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -216,7 +223,7 @@ namespace GroupAssignmentAlonColetonWannes.Items
             {
                 if (txtCode.Text == "")
                 {
-                    txtError.Text = "Please enter an item code";                 
+                    txtError.Text = "Please enter an item code";
                     return false;
                 }
                 if (txtDescription.Text == "")
@@ -278,19 +285,65 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
 
         }
-        
 
-        
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void EnableControls()
         {
             try
             {
-                this.Close();
+                switch (CurrentMode)
+                {
+                    case eCurrentMode.AddItem:
+                        txtCode.IsEnabled = true;
+                        txtDescription.IsEnabled = true;
+                        txtCost.IsEnabled = true;
+
+                        txtCode.Text = "";
+                        txtDescription.Text = "";
+                        txtCost.Text = "";
+
+                        btnAddItem.IsEnabled = false;
+                        btnUpdateItem.IsEnabled = false;
+                        btnDeleteItem.IsEnabled = false;
+                        btnSaveItem.IsEnabled = true;
+
+                        dgItems.IsEnabled = false;
+
+                        break;
+
+
+                    case eCurrentMode.EditItem:
+                        txtCode.IsEnabled = false;
+                        txtDescription.IsEnabled = true;
+                        txtCost.IsEnabled = true;
+
+                        btnAddItem.IsEnabled = false;
+                        btnUpdateItem.IsEnabled = false;
+                        btnDeleteItem.IsEnabled = false;
+                        btnSaveItem.IsEnabled = true;
+
+                        dgItems.IsEnabled = false;
+
+                        break;
+
+
+                    case eCurrentMode.ViewItems:
+                        txtCode.IsEnabled = false;
+                        txtDescription.IsEnabled = false;
+                        txtCost.IsEnabled = false;
+
+                        btnAddItem.IsEnabled = true;
+                        btnUpdateItem.IsEnabled = false;
+                        btnDeleteItem.IsEnabled = false;
+                        btnSaveItem.IsEnabled = false;
+
+                        dgItems.IsEnabled = true;
+
+                        break;
+                }
             }
             catch (Exception ex)
             {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
 
@@ -311,5 +364,7 @@ namespace GroupAssignmentAlonColetonWannes.Items
                 System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
         }
+
+        
     }
 }
