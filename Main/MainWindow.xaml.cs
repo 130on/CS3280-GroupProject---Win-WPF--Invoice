@@ -122,8 +122,13 @@ namespace GroupAssignmentAlonColetonWannes
 
                 this.Hide();
                 wndItemManger.ShowDialog();
-                //check clsItemLogic if there is a change has been made. if it is a static var
-                //And or get the return variable from wndItem
+                if (wndItemManger.ItemModified)
+                {
+                    clsMainLogic.getItemList();
+                    cbItemList.ItemsSource = clsMainLogic.getItemList();
+
+
+                }
 
                 this.Show();
             }

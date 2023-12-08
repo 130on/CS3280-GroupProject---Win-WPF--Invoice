@@ -20,7 +20,7 @@
 
         <TextBlock Text="Items" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="353,4,0,0" Height="48" Width="94"/>
 
-        <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False" SelectionChanged="dgItems_SelectionChanged">
+        <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False" SelectionChanged="dgItems_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Code" Binding="{Binding ItemCode}" Width="Auto" />
                 <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" Width="Auto" />
