@@ -1,6 +1,9 @@
-﻿using System;
+﻿using GroupAssignmentAlonColetonWannes.Common;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,13 +23,52 @@ namespace GroupAssignmentAlonColetonWannes.Items
     public partial class wndItems : Window
     {
 
-        //clsItemsLogic ItemsLogic
+        private bool bItemModified;
+
+        public bool ItemModified
+        {
+            get { return bItemModified; }
+            set { bItemModified = value; }
+        }
+
+        clsItemsLogic ItemsLogic;
+
+        BindingList<itemDetail> Items;
 
         public wndItems()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            //loadItems() to datagrid
+                ItemModified = false;
+
+                ItemsLogic = new clsItemsLogic();
+
+                LoadItems();
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+            
         }
+
+        private void LoadItems()
+        {
+            try
+            {
+                Items = ItemsLogic.GetItems();
+
+                dgItems.ItemsSource = Items;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+
     }
 }

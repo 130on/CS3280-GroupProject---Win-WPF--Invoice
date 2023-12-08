@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="145*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,13 +19,15 @@
 
         <TextBlock Text="Items" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="353,4,0,0" Height="48" Width="94"/>
 
-        <DataGrid Grid.Row="1" Margin="10,10,10,10">
+        <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Code" Binding="{Binding Code}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Item Code" Binding="{Binding ItemCode}" Width="Auto" />
+                <DataGridTextColumn Header="Item Cost" Binding="{Binding Cost}" Width="Auto" />
+                <DataGridTextColumn Header="Item Description" Binding="{Binding ItemDesc}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
+
+
 
         <Grid Margin="0,50,0,0">
             <Grid.ColumnDefinitions>
@@ -38,7 +41,7 @@
             <TextBox x:Name="txtDescription" Grid.Column="2" Text="Description" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -48,11 +51,13 @@
 
             <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20"/>
             <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
-            <Button x:Name="btnDeleteItem" Grid.Row="2" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
-            <Button x:Name="btnSaveItem" Grid.Row="3" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100"/>
+            <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
+            <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100"/>
 
 
         </Grid>
+
+        <TextBlock x:Name="txtError" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="Red"/>
 
     </Grid>
 </Window>
