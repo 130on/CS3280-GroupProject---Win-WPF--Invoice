@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace GroupAssignmentAlonColetonWannes.Common
 {
@@ -14,22 +11,72 @@ namespace GroupAssignmentAlonColetonWannes.Common
 
         public string ItemCode
         {
-            get { return itemCode; }
+            get
+            {
+                try
+                {
+                    return itemCode;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
         //item desc string 
         private string itemDesc;
         public string ItemDesc
         {
-            get { return itemDesc; }
-            set { itemDesc = value; }
+            get
+            {
+                try
+                {
+                    return itemDesc;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+            set
+            {
+                try
+                {
+                    itemDesc = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
         //Item cost decimal
         private decimal cost;
 
         public decimal Cost
         {
-            get { return cost; }
-            set { cost = value; }
+            get
+            {
+                try
+                {
+                    return cost;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+            set
+            {
+                try
+                {
+                    cost = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
 
 
@@ -37,20 +84,58 @@ namespace GroupAssignmentAlonColetonWannes.Common
 
         public int? LineItemNum
         {
-            get { return lineItemNum; }
-            set { lineItemNum = value; }
+            get
+            {
+                try
+                {
+                    return lineItemNum;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+            set
+            {
+                try
+                {
+                    lineItemNum = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
         #endregion
 
-        public itemDetail(string itemCode, string itemDesc, decimal cost, int? lineItemNum = null) { 
-            this.itemCode = itemCode;
-            this.itemDesc = itemDesc;
-            this.cost = cost;
-            this.lineItemNum = lineItemNum;
+        public itemDetail(string itemCode, string itemDesc, decimal cost, int? lineItemNum = null)
+        {
+
+            try
+            {
+                this.itemCode = itemCode;
+                this.itemDesc = itemDesc;
+                this.cost = cost;
+                this.lineItemNum = lineItemNum;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
-        public override string ToString() {
-            return $"{ItemDesc}";
+        public override string ToString()
+        {
+
+            try
+            {
+                return $"{ItemDesc}";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
     }

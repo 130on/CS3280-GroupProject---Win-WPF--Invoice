@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Reflection;
 
 namespace GroupAssignmentAlonColetonWannes.Common
 {
@@ -20,45 +14,119 @@ namespace GroupAssignmentAlonColetonWannes.Common
         //int getTotalCost
         private int totalCost;
         //list of items on the list
-        private ObservableCollection<itemDetail> invoiceItems = new ();
+        private ObservableCollection<itemDetail> invoiceItems = new();
 
         #endregion
 
         #region Get Statements
         public int InvoiceNum
         {
-            get { return invoiceNum; }
-            set { invoiceNum = value; }
+            get
+            {
+                try
+                {
+                    return invoiceNum;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+            set
+            {
+                try
+                {
+                    invoiceNum = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
         public DateTime? InvoiceDate
         {
-            get { return invoiceDate; }
-            set { invoiceDate = value; }
+            get
+            {
+                try
+                {
+                    return invoiceDate;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+            set
+            {
+                try
+                {
+                    invoiceDate = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
 
         public int TotalCost
         {
-            get { return totalCost; }
-            set { totalCost = value; }
+            get
+            {
+                try
+                {
+                    return totalCost;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+            set
+            {
+                try
+                {
+                    totalCost = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
         public ObservableCollection<itemDetail> InvoiceItems
         {
-            get { return invoiceItems; }
+            get
+            {
+                try
+                {
+                    return invoiceItems;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
         }
 
-        public ObservableCollection<itemDetail> InvoiceItemsSorted
-        {
-            get { return (ObservableCollection<itemDetail>)invoiceItems.OrderBy(i => i.LineItemNum); }
-        }
         #endregion
 
 
 
         public invoiceDetail(int invoiceNum, DateTime? invoiceDate, int totalCost)
         {
-            this.invoiceNum = invoiceNum;
-            this.invoiceDate = invoiceDate;
-            this.totalCost = totalCost;
+            try
+            {
+                this.invoiceNum = invoiceNum;
+                this.invoiceDate = invoiceDate;
+                this.totalCost = totalCost;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
         }
     }
 }

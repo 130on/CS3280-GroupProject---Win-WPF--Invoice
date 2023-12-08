@@ -32,24 +32,6 @@ namespace GroupAssignmentAlonColetonWannes.Search
             }
         }
         
-        /// <summary>
-        /// returns a sql that selects one invoice
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static string getOneInvoice(int invoiceNum)
-        {
-            try
-            {
-                string sSQL = "";
-
-                    return sSQL;
-            }
-            catch (Exception ex) {
-
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
 
         #region getOptions
         //public static List<int> getOptionsInvoiceNum()
