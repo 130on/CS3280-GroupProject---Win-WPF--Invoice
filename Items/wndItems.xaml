@@ -19,7 +19,7 @@
 
         <TextBlock Text="Items" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="353,4,0,0" Height="48" Width="94"/>
 
-        <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False" SelectionChanged="dgItems_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Code" Binding="{Binding ItemCode}" Width="Auto" />
                 <DataGridTextColumn Header="Item Cost" Binding="{Binding Cost}" Width="Auto" />
@@ -52,9 +52,9 @@
             <Label Content="Description" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <!-- TextBoxes -->
-            <TextBox x:Name="txtCode" Grid.Column="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtCost" Grid.Column="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-            <TextBox x:Name="txtDescription" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <TextBox x:Name="txtCode" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False"/>
+            <TextBox x:Name="txtCost" Grid.Column="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEnabled="False"/>
+            <TextBox x:Name="txtDescription" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEnabled="False"/>
         </Grid>
 
 
@@ -68,11 +68,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20"/>
-            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
-            <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20"/>
-            <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100"/>
-            <Button x:Name="btnCancel" Grid.Row="4" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100"/>
+            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Click="btnAddItem_Click"/>
+            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False"/>
+            <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False"/>
+            <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100" IsEnabled="False" Click="btnSaveItem_Click"/>
+            <Button x:Name="btnCancel" Grid.Row="4" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100" Click="btnCancel_Click"/>
 
 
         </Grid>
