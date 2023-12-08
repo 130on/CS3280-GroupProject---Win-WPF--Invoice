@@ -24,20 +24,38 @@ namespace GroupAssignmentAlonColetonWannes.Items
     public partial class wndItems : Window
     {
 
+        /// <summary>
+        /// Property to tell MainWindow if changes were made to the items
+        /// </summary>
         private bool bItemModified;
 
+        /// <summary>
+        /// Attribute to tell MainWindow if changes were made to the items
+        /// </summary>
         public bool ItemModified
         {
             get { return bItemModified; }
             set { bItemModified = value; }
         }
 
+        /// <summary>
+        /// ItemsLogic object to handle business logic
+        /// </summary>
         clsItemsLogic ItemsLogic;
 
+        /// <summary>
+        /// List to hold the items
+        /// </summary>
         BindingList<itemDetail> Items;
 
+        /// <summary>
+        /// The currently selected item
+        /// </summary>
         itemDetail SelectedItem;
 
+        /// <summary>
+        /// Possible modes for the window
+        /// </summary>
         private enum eCurrentMode
         {
             ViewItems,
@@ -45,8 +63,15 @@ namespace GroupAssignmentAlonColetonWannes.Items
             EditItem
         }
 
+        /// <summary>
+        /// The current mode
+        /// </summary>
         private eCurrentMode CurrentMode;
 
+        /// <summary>
+        /// Constructor for the window
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public wndItems()
         {
             try
@@ -69,6 +94,10 @@ namespace GroupAssignmentAlonColetonWannes.Items
             
         }
 
+        /// <summary>
+        /// Loads the items into the datagrid
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         private void LoadItems()
         {
             try
@@ -86,6 +115,12 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Event handler for when the selection changes in the datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="Exception"></exception>
         private void dgItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -116,6 +151,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Event handler for when the user clicks the add item button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -134,7 +174,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
         }
 
         
-
+        /// <summary>
+        /// Event handler for when the user clicks the save item button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -187,7 +231,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
         }
 
         
-
+        /// <summary>
+        /// Event handler for when the user clicks the update item button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -204,7 +252,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
-
+        /// <summary>
+        /// Event handler for when the user clicks the cancel button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -217,6 +269,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Validates the user input
+        /// </summary>
+        /// <returns>True if everything is valid</returns>
+        /// <exception cref="Exception"></exception>
         private bool ValidateInput()
         {
             try
@@ -264,6 +321,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Checks if the item code is unique
+        /// </summary>
+        /// <returns>True if unique</returns>
+        /// <exception cref="Exception"></exception>
         private bool IsCodeUnique()
         {
             try
@@ -286,6 +348,10 @@ namespace GroupAssignmentAlonColetonWannes.Items
 
         }
 
+        /// <summary>
+        /// Enables and disables controls based on the current mode
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         private void EnableControls()
         {
             try
@@ -347,6 +413,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Event handler for when the user clicks the delete item button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -383,6 +454,8 @@ namespace GroupAssignmentAlonColetonWannes.Items
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+
+
 
         /// <summary>
         /// displays a message with info about the error

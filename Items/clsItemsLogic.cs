@@ -17,11 +17,19 @@ namespace GroupAssignmentAlonColetonWannes.Items
     {
        
 
+        /// <summary>
+        /// Constructor for the class
+        /// </summary>
         public clsItemsLogic()
         {
 
         }
 
+        /// <summary>
+        /// Gets all the items from the database
+        /// </summary>
+        /// <returns>A list of items</returns>
+        /// <exception cref="Exception"></exception>
         public BindingList<itemDetail> GetItems()
         {
             try
@@ -50,6 +58,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Add an item to the database
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <exception cref="Exception"></exception>
         public void AddItem(itemDetail Item)
         {
             try
@@ -70,6 +83,12 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
+        /// <summary>
+        /// Update an item in the database
+        /// </summary>
+        /// <param name="OldItem"></param>
+        /// <param name="NewItem"></param>
+        /// <exception cref="Exception"></exception>
         public void UpdateItem(itemDetail OldItem, itemDetail NewItem)
         {
             try
@@ -89,6 +108,12 @@ namespace GroupAssignmentAlonColetonWannes.Items
 
         }
 
+        /// <summary>
+        /// Get all invoice numbers for a given item code
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<string> GetInvoicesWithItemCode(itemDetail Item)
         {
             try
@@ -122,7 +147,11 @@ namespace GroupAssignmentAlonColetonWannes.Items
             }
         }
 
-
+        /// <summary>
+        /// Delete an item from the database
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <exception cref="Exception"></exception>
         public void DeleteItem(itemDetail Item)
         {
             try

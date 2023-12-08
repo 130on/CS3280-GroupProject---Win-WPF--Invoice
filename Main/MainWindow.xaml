@@ -32,7 +32,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lbInvoiceNumber" Content="Invoice Number: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="572" Height="66" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0,-5,0,0"/>
-        <Button x:Name="btnSearchScreen" Grid.Column="1" Content="Search for New Invoice" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Height="40" Width="180" Click="btnSearchScreen_Click"/>
+        <Button x:Name="btnSearchScreen" Grid.Column="1" Content="Search For Invoice" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Height="40" Width="180" Click="btnSearchScreen_Click"/>
         <Grid Margin="10,51,228,5">
             <Label Content="Invoice Date:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="115" Height="46" VerticalContentAlignment="Center" FontSize="16" Style="{DynamicResource BasicLabel}"/>
             <DatePicker x:Name="dpInvoiceDate" HorizontalAlignment="Left" Margin="115,0,0,0" VerticalAlignment="Center" IsTodayHighlighted="True" IsDropDownOpen="True" SelectedDateFormat="Short" BorderThickness="3,3,3,3" IsEnabled="False" SelectedDateChanged="dpInvoiceDate_SelectedDateChanged"/>
