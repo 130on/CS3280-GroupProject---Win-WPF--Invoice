@@ -31,7 +31,11 @@ namespace GroupAssignmentAlonColetonWannes.Search
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-        
+
+
+
+        #region getOptions
+
         /// <summary>
         /// returns a sql that selects one invoice
         /// </summary>
@@ -43,16 +47,15 @@ namespace GroupAssignmentAlonColetonWannes.Search
             {
                 string sSQL = "";
 
-                    return sSQL;
+                return sSQL;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
 
-        #region getOptions
-        //public static List<int> getOptionsInvoiceNum()
         public static string getOptionsInvoiceNum()
         {
             try

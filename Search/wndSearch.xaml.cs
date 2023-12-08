@@ -43,8 +43,10 @@ namespace GroupAssignmentAlonColetonWannes.Search
         /// </summary>
         private void loadWindow()
         {
+            // reset the datagrid and the class property that is used to pass info to main window
             invoiceGrid.ItemsSource = null;
             SelectedInvoiceNum = null;
+            
             // loads the data from DB into datagrid and combo boxes
             gridList = clsSearchLogic.loadList();
             invoiceGrid.ItemsSource = gridList;
@@ -96,8 +98,6 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
-                
-                
                 // filter results if only a total cost is selected
                 if (cbTotalCharge.SelectedItem != null && dpInvoiceDate.SelectedDate == null)
                 {
@@ -215,6 +215,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
                 // clear all fields in select window
                 dpInvoiceDate.SelectedDate = null;
                 
+                // reloads the search window and resets it
                 loadWindow();
             }
             catch (Exception ex)
