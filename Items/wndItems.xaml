@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:GroupAssignmentAlonColetonWannes.Items"
         mc:Ignorable="d"
         Title="Items" Height="450" Width="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -21,9 +22,9 @@
 
         <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False" SelectionChanged="dgItems_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Item Code" Binding="{Binding ItemCode}" Width="Auto" />
-                <DataGridTextColumn Header="Item Cost" Binding="{Binding Cost}" Width="Auto" />
-                <DataGridTextColumn Header="Item Description" Binding="{Binding ItemDesc}" Width="*" />
+                <DataGridTextColumn Header="Code" Binding="{Binding ItemCode}" Width="Auto" />
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" Width="Auto" />
+                <DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -68,11 +69,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Click="btnAddItem_Click"/>
-            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False" Click="btnUpdateItem_Click"/>
-            <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="20" IsEnabled="False" Click="btnDeleteItem_Click"/>
-            <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100" IsEnabled="False" Click="btnSaveItem_Click"/>
-            <Button x:Name="btnCancel" Grid.Row="4" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" Width="100" Click="btnCancel_Click"/>
+            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" Click="btnAddItem_Click"/>
+            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" IsEnabled="False" Click="btnUpdateItem_Click"/>
+            <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="15" Width="100" IsEnabled="False" Click="btnDeleteItem_Click"/>
+            <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" IsEnabled="False" Click="btnSaveItem_Click"/>
+            <Button x:Name="btnCancel" Grid.Row="4" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" Click="btnCancel_Click"/>
 
 
         </Grid>
