@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:GroupAssignmentAlonColetonWannes.Items"
         mc:Ignorable="d"
         Title="Items" Height="450" Width="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="145*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,39 +20,65 @@
 
         <TextBlock Text="Items" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="353,4,0,0" Height="48" Width="94"/>
 
-        <DataGrid Grid.Row="1" Margin="10,10,10,10">
+        <DataGrid x:Name="dgItems" Grid.Row="1" Margin="10,10,10,10" AutoGenerateColumns="False" SelectionChanged="dgItems_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Code" Binding="{Binding Code}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Code" Binding="{Binding ItemCode}" Width="Auto" />
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" Width="Auto" />
+                <DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
 
+
+
         <Grid Margin="0,50,0,0">
             <Grid.ColumnDefinitions>
+                <!-- Two columns for each label-textbox pair -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Column for Label -->
                 <ColumnDefinition Width="*"/>
+                <!-- Column for TextBox -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Column for Label -->
                 <ColumnDefinition Width="*"/>
+                <!-- Column for TextBox -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Column for Label -->
                 <ColumnDefinition Width="*"/>
+                <!-- Column for TextBox -->
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="txtCode" Grid.Column="0" Text="Code" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtCost" Grid.Column="1" Text="Cost" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBox x:Name="txtDescription" Grid.Column="2" Text="Description" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!-- Labels -->
+            <Label Content="Code" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Cost" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Description" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <!-- TextBoxes -->
+            <TextBox x:Name="txtCode" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False"/>
+            <TextBox x:Name="txtCost" Grid.Column="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEnabled="False"/>
+            <TextBox x:Name="txtDescription" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Center" IsEnabled="False"/>
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+
+
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MainButtonController}"/>
-            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MainButtonController}" />
-            <Button x:Name="btnDeleteItem" Grid.Row="2" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Style="{DynamicResource MainButtonController}"/>
+            <Button  x:Name="btnAddItem" Grid.Row="0" Content="Add Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" Click="btnAddItem_Click"/>
+            <Button x:Name="btnUpdateItem" Grid.Row="1" Content="Update Item" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" IsEnabled="False" Click="btnUpdateItem_Click"/>
+            <Button x:Name="btnDeleteItem" Grid.Row="3" Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="15" Width="100" IsEnabled="False" Click="btnDeleteItem_Click"/>
+            <Button x:Name="btnSaveItem" Grid.Row="2" Content="Save Item"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" IsEnabled="False" Click="btnSaveItem_Click"/>
+            <Button x:Name="btnCancel" Grid.Row="4" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Width="100" Click="btnCancel_Click"/>
 
 
         </Grid>
+
+        <TextBlock x:Name="txtError" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="Red"/>
 
     </Grid>
 </Window>
