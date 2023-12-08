@@ -194,15 +194,10 @@ namespace GroupAssignmentAlonColetonWannes.Main
         public int newItem(string newItemCode)
         {
             try
-            {
-                ObservableCollection<itemDetail> x = new(activeInvoice.InvoiceItems.OrderBy(i => i.LineItemNum));
- 
-                itemDetail? lastInvoice = x.LastOrDefault();
-                int lineNumber = 1;
-                if (lastInvoice != null)
-                {
-                    lineNumber = (int)lastInvoice.LineItemNum + 1;
-                }
+            { 
+                itemDetail? lastInvoice = activeInvoice.InvoiceItems.LastOrDefault();
+                int lineNumber = (lastInvoice != null? (int)lastInvoice.LineItemNum: 0) +1;
+                
                 sSQLCommands.Add(clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode));
 
                 string sSQL = clsMainSQL.getItem(newItemCode);
@@ -212,7 +207,6 @@ namespace GroupAssignmentAlonColetonWannes.Main
                 foreach (DataRow row in dsItems.Tables[0].Rows)
                 {
                     activeInvoice.InvoiceItems.Add(new itemDetail((string)row["ItemCode"], (string)row["ItemDesc"], (decimal)row["Cost"], lineNumber));
-
                 }
                 //string item = clsDataAccess.ExecuteScalarSQL(sSQL);
 

@@ -69,7 +69,7 @@
 
         </Grid>
 
-        <TextBlock x:Name="txtError" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="Red"/>
+        <TextBlock x:Name="txtError" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Foreground="Red" TextWrapping="Wrap"/>
 
     </Grid>
 </Window>
