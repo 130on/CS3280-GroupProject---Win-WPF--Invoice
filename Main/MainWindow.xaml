@@ -7,39 +7,47 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="474" Width="822">
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="102.009"/>
-            <RowDefinition Height="347*"/>
-            <RowDefinition Height="9*"/>
+
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="84.009"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgInvoiceItemDisplay" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Margin="10,10,10,1" Grid.Row="1" AlternationCount="1" AlternatingRowBackground="#FFE6E6E6" GridLinesVisibility="Horizontal" CanUserResizeRows="False" AutoGenerateColumns="False" IsReadOnly="True">
+        <Label x:Name="lbInvoiceNumber" Content="Invoice Number: " HorizontalAlignment="Center" VerticalAlignment="Top" Width="572" Height="66" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0,3,0,0" Grid.RowSpan="2"/>
+        <Menu Grid.RowSpan="1" Grid.ColumnSpan="2">
+            <MenuItem Header="Window">
+                <MenuItem Header="Search For Invoice" Click="btnSearchScreen_Click" IsEnabled="{Binding IsEnabled, ElementName=btnSearchScreen}"/>
+                <MenuItem Header="Edit Item Collection" Click="btnItemWindow_Click"  IsEnabled="{Binding IsEnabled, ElementName=btnItemWindow}"/>
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="dgInvoiceItemDisplay" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Margin="10,10,10,1" Grid.Row="2" AlternationCount="1" AlternatingRowBackground="#FFE6E6E6" GridLinesVisibility="Horizontal" CanUserResizeRows="False" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ItemCode" Binding="{Binding Path= ItemCode}" Width="0.5*"/>
-                <DataGridTextColumn Header="ItemDesc" Binding="{Binding Path= ItemDesc}" Width="2*"/>
-                <DataGridTextColumn Header="Cost" Binding="{Binding Path= Cost}" Width="1*"/>
+                <DataGridTextColumn Header="ItemCode" Binding="{Binding ItemCode}" Width="0.5*"/>
+                <DataGridTextColumn Header="ItemDesc" Binding="{Binding ItemDesc}" Width="2*"/>
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" Width="1*"/>
                 <DataGridTemplateColumn Width="0.75*" Header="Delete Item" CanUserSort="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="cmdDeleteItem" Background="#FFC10000" Foreground="White" Margin="10,10,10,10" Click="cmdDeleteItem_Click" Uid="{Binding Path=LineItemNum}" IsEnabled="{Binding IsEnabled, ElementName=btnAddItem}">Delete</Button>
+                            <Button x:Name="cmdDeleteItem" Background="#FFC10000" Foreground="White" Margin="10,10,10,10" Click="cmdDeleteItem_Click" Uid="{Binding LineItemNum}" IsEnabled="{Binding IsEnabled, ElementName=btnAddItem}" Content="Delete"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="lbInvoiceNumber" Content="Invoice Number: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="572" Height="66" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0,-5,0,0"/>
-        <Button x:Name="btnSearchScreen" Grid.Column="1" Content="Search For Invoice" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Height="40" Width="180" Click="btnSearchScreen_Click"/>
-        <Grid Margin="10,51,228,5">
+        <Button x:Name="btnSearchScreen" Grid.Column="1" Content="Search For Invoice" HorizontalAlignment="Center" Margin="0,3,0,0" VerticalAlignment="Top" Height="40" Width="180" Click="btnSearchScreen_Click" Grid.Row="1"/>
+        <Grid Margin="10,0,228,9" Grid.Row="1" Height="33" VerticalAlignment="Bottom">
             <Label Content="Invoice Date:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="115" Height="46" VerticalContentAlignment="Center" FontSize="16" Style="{DynamicResource BasicLabel}"/>
-            <DatePicker x:Name="dpInvoiceDate" HorizontalAlignment="Left" Margin="115,0,0,0" VerticalAlignment="Center" IsTodayHighlighted="True" IsDropDownOpen="True" SelectedDateFormat="Short" BorderThickness="3,3,3,3" IsEnabled="False" SelectedDateChanged="dpInvoiceDate_SelectedDateChanged"/>
+            <DatePicker x:Name="dpInvoiceDate" HorizontalAlignment="Center" VerticalAlignment="Center" IsTodayHighlighted="True" IsDropDownOpen="True" SelectedDateFormat="Short" BorderThickness="3,3,3,3" IsEnabled="False" SelectedDateChanged="dpInvoiceDate_SelectedDateChanged"/>
         </Grid>
-        <Label Content="Total Cost:" HorizontalAlignment="Left" Margin="297,0,0,10" Width="94" FontSize="16" Height="35" VerticalAlignment="Bottom" Style="{DynamicResource BasicLabel}"/>
-        <Label x:Name="txtTotalCost" HorizontalAlignment="Left" Margin="381,0,0,10" VerticalAlignment="Bottom" Width="60" FontWeight="SemiBold" Height="35" FontSize="16" Content="500"/>
-        <GroupBox Grid.Column="1" Header="Items" Margin="0,8,0,0" Grid.Row="1" Height="180" VerticalAlignment="Top">
+        <Label Content="Total Cost:" HorizontalAlignment="Left" Margin="297,0,0,8" Width="94" FontSize="16" Height="35" VerticalAlignment="Bottom" Style="{DynamicResource BasicLabel}" Grid.Row="1"/>
+        <Label x:Name="txtTotalCost" HorizontalAlignment="Left" Margin="381,0,0,8" VerticalAlignment="Bottom" Width="60" FontWeight="SemiBold" Height="35" FontSize="16" Content="500" Grid.Row="1"/>
+        <GroupBox Grid.Column="1" Header="Items" Margin="0,14,0,0" Grid.Row="2" Height="180" VerticalAlignment="Top">
             <Grid Margin="-1,0,1,0">
                 <ComboBox x:Name="cbItemList" Margin="65,10,12,0" VerticalAlignment="Top" Height="26" BorderThickness="3,3,3,3" SelectionChanged="cbItemList_SelectionChanged"/>
                 <Label Content="Item:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
@@ -50,9 +58,9 @@
 
             </Grid>
         </GroupBox>
-        <Button x:Name="btnNewInvoice" Grid.Column="1" Content="New Invoice" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="180" Height="38" Click="btnNewInvoice_Click"/>
-        <Button x:Name="btnEditSaveInvoice" Grid.Column="1" Content="Edit/Save Invoice" Margin="0,196,0,0" Grid.Row="1" VerticalAlignment="Top"  HorizontalAlignment="Center" Height="53" Width="178" Click="btnEditSaveInvoice_Click" IsEnabled= "True" />
-        <Button x:Name="btnCancelChanges" Grid.Column="1" Content="Cancel Changes" Margin="0,265,0,0" Grid.Row="1" Height="53" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Center" Width="178" Click="btnCancelChanges_Click"/>
+        <Button x:Name="btnNewInvoice" Grid.Column="1" Content="New Invoice" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Width="180" Height="38" Click="btnNewInvoice_Click" Grid.Row="1" Grid.RowSpan="2"/>
+        <Button x:Name="btnEditSaveInvoice" Grid.Column="1" Content="Edit/Save Invoice" Margin="0,203,0,0" Grid.Row="2" VerticalAlignment="Top"  HorizontalAlignment="Center" Height="53" Width="178" Click="btnEditSaveInvoice_Click" IsEnabled= "True" />
+        <Button x:Name="btnCancelChanges" Grid.Column="1" Content="Cancel Changes" Margin="0,272,0,0" Grid.Row="2" Height="53" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Center" Width="178" Click="btnCancelChanges_Click"/>
     </Grid>
 </Window>
     
