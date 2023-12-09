@@ -360,6 +360,8 @@ namespace GroupAssignmentAlonColetonWannes
 
             try
             {
+                btnNewInvoice.IsEnabled = true;
+                btnSearchScreen.IsEnabled = true;
                 btnEditSaveInvoice.Content = "Edit Invoice";
                 editMode = false;
                 btnAddItem.IsEnabled = false;
@@ -382,6 +384,8 @@ namespace GroupAssignmentAlonColetonWannes
         {
             try
             {
+                btnNewInvoice.IsEnabled = false;
+                btnSearchScreen.IsEnabled = false;
                 btnEditSaveInvoice.Content = "Save Invoice";
                 btnAddItem.IsEnabled = true;
                 editMode = true;
