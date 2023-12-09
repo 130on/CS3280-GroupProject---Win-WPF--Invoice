@@ -82,33 +82,7 @@ namespace GroupAssignmentAlonColetonWannes
         }
 
 
-        /// <summary>
-        /// The selected invoice is found and updated on the screen.
-        /// </summary>
-        /// <param name="selectedInvoice">The selected invoice if null it returns to default screen</param>
-        /// <exception cref="Exception"></exception>
-        public void setInvoice(int? selectedInvoice)
-        {
-            try
-            {
-                if (selectedInvoice == null)
-                {
-                    setDefaults();
-                    return;
-                }
-                activeInvoice = new clsMainLogic((int)selectedInvoice);
-                lbInvoiceNumber.Content = $"Invoice Number: {activeInvoice.getInvoiceNum()}";
-                dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
-                dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
-                txtTotalCost.Content = activeInvoice.getTotalCost();
-                btnEditSaveInvoice.IsEnabled = true;
-                setReadOnlyMode();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
+
 
         /// <summary>
         /// Opens the search screen and passes the selected invoice to setInvoice
@@ -319,6 +293,35 @@ namespace GroupAssignmentAlonColetonWannes
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                                     MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// The selected invoice is found and updated on the screen.
+        /// </summary>
+        /// <param name="selectedInvoice">The selected invoice if null it returns to default screen</param>
+        /// <exception cref="Exception"></exception>
+        private void setInvoice(int? selectedInvoice)
+        {
+            try
+            {
+                if (selectedInvoice == null)
+                {
+                    setDefaults();
+                    return;
+                }
+                activeInvoice = new clsMainLogic((int)selectedInvoice);
+                lbInvoiceNumber.Content = $"Invoice Number: {activeInvoice.getInvoiceNum()}";
+                dpInvoiceDate.SelectedDate = activeInvoice.getInvoiceTime();
+                dgInvoiceItemDisplay.ItemsSource = activeInvoice.getInvoiceItems();
+                txtTotalCost.Content = activeInvoice.getTotalCost();
+                btnEditSaveInvoice.IsEnabled = true;
+                setReadOnlyMode();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
 

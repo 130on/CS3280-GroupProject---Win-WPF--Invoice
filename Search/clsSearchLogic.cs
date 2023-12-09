@@ -13,7 +13,9 @@ namespace GroupAssignmentAlonColetonWannes.Search
 {
     public class clsSearchLogic
     {
-        // declare and instantiate a binding list to hold the data for the datagrid
+        /// <summary>
+        /// declare and instantiate a binding list to hold the data for the datagrid
+        /// </summary>
         private static BindingList<invoiceDetail>? gridInvoiceList = new BindingList<invoiceDetail>();
 
         /// <summary>

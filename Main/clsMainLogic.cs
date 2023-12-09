@@ -223,7 +223,8 @@ namespace GroupAssignmentAlonColetonWannes.Main
         {
             try
             {
-                itemDetail? lastInvoice = activeInvoice.InvoiceItems.LastOrDefault();
+                ObservableCollection<itemDetail> orderCollection = new(activeInvoice.InvoiceItems.OrderBy(i => i.LineItemNum));
+                itemDetail? lastInvoice = orderCollection.LastOrDefault();
                 int lineNumber = (lastInvoice != null ? (int)lastInvoice.LineItemNum : 0) + 1;
 
                 sSQLCommands.Add(clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode));

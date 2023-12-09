@@ -14,9 +14,9 @@ namespace GroupAssignmentAlonColetonWannes.Search
     public class clsSearchSQL
     {
         /// <summary>
-        /// returns a sql that selects all invoices from DB
+        /// Used to get a list of all the sql statements
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a string query sql statement</returns>
         /// <exception cref="Exception"></exception>
         public static string getAllInvoices()
         {
@@ -37,25 +37,10 @@ namespace GroupAssignmentAlonColetonWannes.Search
         #region getOptions
 
         /// <summary>
-        /// returns a sql that selects one invoice
+        /// A sql query statement 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The invoice numbers</returns>
         /// <exception cref="Exception"></exception>
-        public static string getOneInvoice(int invoiceNum)
-        {
-            try
-            {
-                string sSQL = "";
-
-                return sSQL;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-
         public static string getOptionsInvoiceNum()
         {
             try
@@ -80,7 +65,11 @@ namespace GroupAssignmentAlonColetonWannes.Search
             }
         }
 
-        //public static List<DateTime> getOptionsInvoiceDate()
+        /// <summary>
+        /// Gets all the unique days possible
+        /// </summary>
+        /// <returns>A query sql statement</returns>
+        /// <exception cref="Exception"></exception>
         public static string getOptionsInvoiceDate()
         {
             try
@@ -105,7 +94,11 @@ namespace GroupAssignmentAlonColetonWannes.Search
             }
         }
 
-        //public static List<int> getOptionsTotalCost() 
+        /// <summary>
+        /// The distinct number of total cost
+        /// </summary>
+        /// <returns>A query sql statement</returns>
+        /// <exception cref="Exception"></exception>
         public static string getOptionsTotalCost()
         {
             try
