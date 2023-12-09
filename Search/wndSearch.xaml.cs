@@ -70,16 +70,24 @@ namespace GroupAssignmentAlonColetonWannes.Search
             try
             {
                 // clear selection from the Total Charge combo box
-                cbTotalCharge.SelectedItem = null;
+                //cbTotalCharge.SelectedItem = null;
 
                 if (cbInvoiceNum.SelectedItem != null)
-                {   
+                {
                     // Store the current combo box value in a variable
+                    int? selectedCost = null;
+                    if (cbTotalCharge.SelectedItem != null)
+                    {
+                        selectedCost = ((invoiceDetail)cbTotalCharge.SelectedItem).TotalCost;
+
+                    }
                     int selectedNum = ((invoiceDetail)cbInvoiceNum.SelectedItem).InvoiceNum;
 
+                    DateTime? selectedDate = dpInvoiceDate.SelectedDate;
+
                     // Filter the original list based on the selected InvoiceNum
-                    clsSearchLogic.filterGridByInvoiceNum(selectedNum);
-                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridByInvoiceNum(selectedNum);
+                    //clsSearchLogic.filterGridByInvoiceNum(selectedNum);
+                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, selectedDate, selectedNum);
                 }
             }
             catch (Exception ex)
@@ -98,13 +106,33 @@ namespace GroupAssignmentAlonColetonWannes.Search
         {
             try
             {
+                int? selectedNum = null;
+                if (cbInvoiceNum.SelectedItem != null)
+                {
+                    selectedNum = ((invoiceDetail)cbInvoiceNum.SelectedItem).InvoiceNum;
+                }
+
+                int? selectedCost = null;
+                if (cbTotalCharge.SelectedItem != null)
+                {
+                    selectedCost = ((invoiceDetail)cbTotalCharge.SelectedItem).TotalCost;
+                }
+                DateTime? selectedDate = null;
+                if(dpInvoiceDate.SelectedDate != null)
+                {
+                    selectedDate = dpInvoiceDate.SelectedDate;
+                }
+                invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, selectedDate, selectedNum);
+
+
+                /*
                 // filter results if only a total cost is selected
                 if (cbTotalCharge.SelectedItem != null && dpInvoiceDate.SelectedDate == null)
                 {
                     // Store the current combo box value in a variable
                     int selectedCost = ((invoiceDetail)cbTotalCharge.SelectedItem).TotalCost;
                     // display filtered results in datagrid
-                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, null);
+                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, null, selectedNum);
 
                 }
                 
@@ -115,7 +143,7 @@ namespace GroupAssignmentAlonColetonWannes.Search
                     int selectedCost = ((invoiceDetail)cbTotalCharge.SelectedItem).TotalCost;
                     DateTime selectedDate = (DateTime)dpInvoiceDate.SelectedDate;
                     // display filtered results in datagrid
-                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, selectedDate);
+                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(selectedCost, selectedDate, selectedNum);
                 }
 
                 // filter results in datagrid if only date is selected
@@ -124,9 +152,9 @@ namespace GroupAssignmentAlonColetonWannes.Search
                     // Store the current combo box value in a variable
                     DateTime? selectedDate = (DateTime?)dpInvoiceDate.SelectedDate;
                     // display filtered results in datagrid
-                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(null, selectedDate);
-                }
-                
+                    invoiceGrid.ItemsSource = clsSearchLogic.filterGridBySelections(null, selectedDate, selectedNum);
+                }*/
+
             }
 
             catch (Exception ex)

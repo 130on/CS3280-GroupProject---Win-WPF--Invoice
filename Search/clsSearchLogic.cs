@@ -127,63 +127,58 @@ namespace GroupAssignmentAlonColetonWannes.Search
             }
         }
 
+ 
+
         /// <summary>
-        /// filters the list of invoices in the datagrid based on the invoice number selected in the combo box
+        /// filters the list of invoices in the datagrid based on the total cost and/or date selected in the datagrid and/or invoicenumber
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The filtered list as a binding list of objects</returns>
         /// <exception cref="Exception"></exception>
-        public static BindingList <invoiceDetail> filterGridByInvoiceNum(int invoiceNum)
+        public static BindingList <invoiceDetail> filterGridBySelections(int? totalCost, DateTime? date, int? invoiceNum = null)
         {
             try
             {
-                // declare a filtered bindingList using LINQ method that filters based on invoice number selected by the user
-                var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
-                        (invoice => invoice.InvoiceNum == invoiceNum).Distinct().ToList());
+                BindingList<invoiceDetail> filteredList;
+                if(invoiceNum == null)
+                {
+                    filteredList = new BindingList<invoiceDetail>(gridInvoiceList);
+                }
+                else
+                {
+                    filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
+                       (invoice => invoice.InvoiceNum == invoiceNum).Distinct().ToList());
+                }
+                if(totalCost == null && date == null)
+                {
+                    return filteredList;
+                }
+               
 
-                // return a filtered list that will be used to display results in the datagrid
-                return filteredList;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// filters the list of invoices in the datagrid based on the total cost and/or date selected in the datagrid
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static BindingList <invoiceDetail> filterGridBySelections(int? totalCost, DateTime? date)
-        {
-            try
-            {
                 // filter datagrid list based on user's total cost choice
                 if (totalCost != null && date == null)
                 {
                     // declare a filtered bindingList using LINQ method that filters based on total cost and date selected by the user
-                    var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
+                    filteredList = new BindingList<invoiceDetail>(filteredList.Where
                             (invoice => invoice.TotalCost == totalCost).Distinct().ToList());
                     
                     // return a filtered list that will be used to display results in the datagrid
-                    return filteredList;
                 }
                 // filter datagrid list based on user's date input 
                 else if (totalCost == null && date != null)
                 {
-                    var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.Where
+                    filteredList = new BindingList<invoiceDetail>(filteredList.Where
                             (invoice => invoice.InvoiceDate == date).Distinct().ToList());
 
-                    return filteredList;
                 }
                 // // filter datagrid list based on user's total cost choice and date input 
                 else
                 {
-                    var filteredList = new BindingList<invoiceDetail>(gridInvoiceList.
+                    filteredList = new BindingList<invoiceDetail>(filteredList.
                                         Where(invoice => invoice.TotalCost == totalCost &&
                                         invoice.InvoiceDate == date).Distinct().ToList());
-                    return filteredList;
                 }
+                return filteredList;
+
             }
             catch (Exception ex)
             {
