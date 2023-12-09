@@ -18,7 +18,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="lbInvoiceNumber" Content="Invoice Number: " HorizontalAlignment="Center" VerticalAlignment="Top" Width="572" Height="66" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0,3,0,0" Grid.RowSpan="2"/>
+        <Label x:Name="lbInvoiceNumber" Content="Invoice Number: " HorizontalAlignment="Center" VerticalAlignment="Top" Width="552" Height="66" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0,3,0,0" Grid.RowSpan="2"/>
         <Menu Grid.RowSpan="1" Grid.ColumnSpan="2">
             <MenuItem Header="Window">
                 <MenuItem Header="Search For Invoice" Click="btnSearchScreen_Click" IsEnabled="{Binding IsEnabled, ElementName=btnSearchScreen}"/>

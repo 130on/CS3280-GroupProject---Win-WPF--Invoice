@@ -224,11 +224,7 @@ namespace GroupAssignmentAlonColetonWannes.Main
             try
             {
                 itemDetail? lastInvoice = activeInvoice.InvoiceItems.LastOrDefault();
-                if (lastInvoice == null)
-                {
-                    return -1;
-                }
-                int lineNumber = (lastInvoice.LineItemNum != null ? (int)lastInvoice.LineItemNum : 0) + 1;
+                int lineNumber = (lastInvoice != null ? (int)lastInvoice.LineItemNum : 0) + 1;
 
                 sSQLCommands.Add(clsMainSQL.newItemInInvoice(activeInvoice.InvoiceNum, lineNumber, newItemCode));
 
