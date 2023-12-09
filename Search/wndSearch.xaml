@@ -25,10 +25,10 @@
                     <DataGridTextColumn Header="Total Cost" Width="*" Binding="{Binding TotalCost}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Style="{DynamicResource MainButtonController}" x:Name="selectBtn" Grid.Column="1" Content="Select Invoice" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Click="selectBtn_Click" />
-            <Button Style="{DynamicResource MainButtonController}" x:Name="clearBtn" Grid.Column="1" Content="Clear Selection" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" Click="clearBtn_Click"/>
+            <Button  x:Name="selectBtn" Grid.Column="1" Content="Select Invoice" HorizontalAlignment="Center" Margin="0,53,0,0" Height="53" Width="178" VerticalAlignment="Top" Click="selectBtn_Click" />
+            <Button Height="53" Width="178" x:Name="clearBtn" Grid.Column="1" Content="Clear Selection" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" Click="clearBtn_Click"/>
             <Label Content="Invoice List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="128" FontWeight="Bold" FontSize="16"/>
-            <Button Style="{DynamicResource MainButtonController}" x:Name="cancelBtn" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,244,0,0" Click="cancelBtn_Click"/>
+            <Button Height="53" Width="178" x:Name="cancelBtn" Grid.Column="1" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,244,0,0" Click="cancelBtn_Click"/>
         </Grid>
 
         <Grid Grid.Row="0">
@@ -39,7 +39,7 @@
             </Grid.ColumnDefinitions>
             <DatePicker x:Name="dpInvoiceDate" Grid.Column="2" HorizontalAlignment="Left" Margin="129,73,0,0" VerticalAlignment="Top" Width="124" Height="39" BorderThickness="3,3,3,3" SelectedDateChanged="cbTotalCharge_SelectionChanged"/>
 
-            <ComboBox x:Name="cbInvoiceNum" Style="{DynamicResource ComboBoxDefault}" Grid.Column="0" IsEditable="True" DockPanel.Dock="Right" Width="100" Margin="156,80,32,38" BorderThickness="3,3,3,3" SelectionChanged="cbInvoiceNum_SelectionChanged"/>
+            <ComboBox x:Name="cbInvoiceNum" Grid.Column="0" IsEditable="True" DockPanel.Dock="Right" Width="100" Margin="156,80,32,38" BorderThickness="3,3,3,3" SelectionChanged="cbInvoiceNum_SelectionChanged"/>
             <Label Grid.Column="0" Content="Invoice Number:" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="14,77,0,0" VerticalAlignment="Top" Width="137" Style="{DynamicResource BasicLabel}"/>
 
             <ComboBox x:Name="cbTotalCharge" Grid.Column="1" IsEditable="True" DockPanel.Dock="Right" Margin="134,80,48,38" BorderThickness="3,3,3,3" SelectionChanged="cbTotalCharge_SelectionChanged"/>

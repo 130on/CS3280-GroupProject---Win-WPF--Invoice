@@ -151,7 +151,7 @@ namespace GroupAssignmentAlonColetonWannes
                 if (wndItemManger.ItemModified)
                 {
                     cbItemList.ItemsSource = clsMainLogic.getItemList();
-                    if(activeInvoice != null)
+                    if (activeInvoice != null)
                     {
                         txtTotalCost.Content = activeInvoice.UpdateDataBase(false);
                     }
@@ -179,7 +179,7 @@ namespace GroupAssignmentAlonColetonWannes
                 {
                     dpInvoiceDate.IsEnabled = false;
 
-                    int newInvoiceNumber = activeInvoice.newInvoice(dpInvoiceDate.SelectedDate, activeInvoice.getTotalCost());
+                    int newInvoiceNumber = activeInvoice.saveNewInvoice(dpInvoiceDate.SelectedDate, activeInvoice.getTotalCost());
                     lbInvoiceNumber.Content = $"Invoice Number: {newInvoiceNumber}";
                     newInvoice = false;
                 }
@@ -252,10 +252,13 @@ namespace GroupAssignmentAlonColetonWannes
                                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
-
+        /// <summary>
+        /// Updates the cost textbox when a new item is selected from the list. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             try
             {
                 itemDetail selectedItem = (itemDetail)cbItemList.SelectedItem;
@@ -276,13 +279,16 @@ namespace GroupAssignmentAlonColetonWannes
             }
         }
 
+        /// <summary>
+        /// When the user selects a date it determines if the user can save the invoice. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dpInvoiceDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 btnEditSaveInvoice.IsEnabled = dgInvoiceItemDisplay.Items.Count > 0 && dpInvoiceDate.SelectedDate != null;
-
-
             }
             catch (Exception ex)
             {
@@ -300,14 +306,14 @@ namespace GroupAssignmentAlonColetonWannes
         {
             try
             {
-                if(activeInvoice != null)
+                if (activeInvoice != null)
                 {
                     bool noItems = false;
                     itemDetail x = (itemDetail)dgInvoiceItemDisplay.SelectedItem;
                     txtTotalCost.Content = activeInvoice.deleteItemFromInvoice(x, ref noItems);
 
                     btnEditSaveInvoice.IsEnabled = !noItems && dpInvoiceDate.SelectedDate != null;
-                }          
+                }
             }
             catch (Exception ex)
             {

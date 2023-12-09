@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace GroupAssignmentAlonColetonWannes.Main
 {
+    /// <summary>
+    /// The sql statements to be ran across mainLogic 
+    /// </summary>
     public static class clsMainSQL
     {
 
